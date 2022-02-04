@@ -50,5 +50,5 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
     });
 }
 
-export type { RouteManager } from './route-manager';
-export { ROUTES_DEPENDENCY_TYPES } from './dependency-types';
+export type { RouteManager };
+export { ROUTES_DEPENDENCY_TYPES };

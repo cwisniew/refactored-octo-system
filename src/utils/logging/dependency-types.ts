@@ -4,6 +4,6 @@
  */
 
 export const LOGGING_DEPENDENCY_TYPES = {
-  /** Factory class for creating {@logger}s. */
-  LoggerFactory: Symbol.for('LoggerFactory'),
+  /** Factory function for creating {@logger}s. */
+  LoggerFactory: Symbol.for('Factory<Logger>'),
 };

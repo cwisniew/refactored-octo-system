@@ -16,5 +16,5 @@ if (!dependencyContainer.isBound(SERVER_DEPENDENCY_TYPES.VTTServer)) {
     .inRequestScope();
 }
 
-export type { VTTServer } from './vtt-server';
-export { SERVER_DEPENDENCY_TYPES } from './dependency-types';
+export type { VTTServer };
+export { SERVER_DEPENDENCY_TYPES };

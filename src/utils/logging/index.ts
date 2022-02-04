@@ -4,20 +4,46 @@
  */
 
 import { dependencyContainer } from '../dependency-injection';
-import { LoggerFactory } from './logger-factory';
 import { LOGGING_DEPENDENCY_TYPES } from './dependency-types';
-import { LoggerFactoryImpl } from './logger-factory-impl';
+import { Logger } from './logger';
+import { default as winston } from 'winston';
+import { interfaces } from 'inversify';
 
-/*
- * Bind
- */
+const loggerMap = new Map<string, Logger>();
+
+/* Only Bind logging classes if not already bound. */
 if (!dependencyContainer.isBound(LOGGING_DEPENDENCY_TYPES.LoggerFactory)) {
   dependencyContainer
-    .bind<LoggerFactory>(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
-    .to(LoggerFactoryImpl)
-    .inSingletonScope();
+    .bind<interfaces.Factory<Logger>>(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
+    .toFactory<Logger, ['']>((context: interfaces.Context) => {
+      return (loggerName: string) => {
+        const existing = loggerMap.get(loggerName);
+        if (existing) {
+          return existing;
+        }
+
+        const logger: Logger = winston.createLogger({
+          transports: [
+            new winston.transports.Console({
+              format: winston.format.combine(
+                winston.format.colorize(),
+                winston.format.timestamp(),
+                winston.format.align(),
+                winston.format.printf(
+                  (info) =>
+                    `${loggerName}: ${info.timestamp} ${info.level} ${info.message}`,
+                ),
+              ),
+            }),
+          ],
+        });
+
+        loggerMap.set(loggerName, logger);
+
+        return logger;
+      };
+    });
 }
 
-export { LOGGING_DEPENDENCY_TYPES } from './dependency-types';
-export type { LoggerFactory } from './logger-factory';
-export type { Logger } from './logger';
+export { LOGGING_DEPENDENCY_TYPES };
+export type { Logger };

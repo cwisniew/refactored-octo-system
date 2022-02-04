@@ -4,11 +4,7 @@
  */
 
 import { RouteHandler } from './route-handler';
-import {
-  Logger,
-  LoggerFactory,
-  LOGGING_DEPENDENCY_TYPES,
-} from '../../utils/logging';
+import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
 
@@ -21,9 +17,9 @@ export class RootRouteHandler implements RouteHandler {
 
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
-    loggerFactory: LoggerFactory,
+    loggerFactory: (name: string) => Logger,
   ) {
-    this.logger = loggerFactory.getLogger(this.constructor.name);
+    this.logger = loggerFactory(this.constructor.name);
   }
 
   addRoutes(expressApp: Express): void {
