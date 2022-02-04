@@ -14,7 +14,7 @@ export interface RouteManager {
    * Adds the routes to the express application/
    * @param express the express application to add the routes to.
    */
-  addRoute(express: Express): void;
+  addRoutes(express: Express): void;
 
   /**
    * Registers a route handler to the route manager.

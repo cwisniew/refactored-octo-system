@@ -3,13 +3,12 @@
  * license TBD
  */
 
-import express from 'express';
+import { dependencyContainer } from './utils/dependency-injection';
+import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
 
-const app = express();
-const port = 3000;
-
-app.get('/', (req, res) => res.send('Hello World!'));
-
-app.listen(port, () => {
-  return console.log(`Express app listening on port ${port}!`);
-});
+const vttServer = dependencyContainer.get<VTTServer>(
+  SERVER_DEPENDENCY_TYPES.VTTServer,
+);
+const run = async () => {
+  await vttServer.start();
+}();

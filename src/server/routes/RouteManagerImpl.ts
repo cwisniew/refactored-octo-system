@@ -1,0 +1,48 @@
+/*
+ * This software Copyright by Craig Wisniewski
+ * license TBD
+ */
+
+import { RouteHandler } from './RouteHandler';
+import {
+  Logger,
+  LoggerFactory,
+  LOGGING_DEPENDENCY_TYPES,
+} from '../../utils/logging';
+import { RouteManager } from './RouteManager';
+import { inject, injectable } from 'inversify';
+import { Express } from 'express';
+
+/**
+ * Class that manages the {@link RouteHandler}s. for a server.
+ */
+@injectable()
+export class RouteManagerImpl implements RouteManager {
+  private readonly logger: Logger;
+  private readonly routeHandlers: RouteHandler[] = [];
+
+  constructor(
+    @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
+    loggerFactory: LoggerFactory,
+  ) {
+    this.logger = loggerFactory.getLogger(this.constructor.name);
+  }
+
+  /**
+   * Adds the routes in the {@link RouteHandler}s to the express app.
+   * @param express the express app to add the routes to.
+   */
+  addRoutes = (express: Express): void => {
+    this.routeHandlers.forEach((routeHandler) => {
+      routeHandler.addRoutes(express);
+    });
+  };
+
+  /**
+   * Registers a {@link RouteHandler} to be managed by this class.
+   * @param routes
+   */
+  registerRouteHandler = (routes: RouteHandler): void => {
+    this.routeHandlers.push(routes);
+  };
+}

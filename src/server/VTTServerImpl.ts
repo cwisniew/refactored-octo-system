@@ -12,6 +12,7 @@ import {
 } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
+import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
 @injectable()
 export class VTTServerImpl implements VTTServer {
   /**
@@ -41,10 +42,13 @@ export class VTTServerImpl implements VTTServer {
   /**
    * Creates a new instance of the VTTServerImpl class.
    * @param loggerFactory The {@LoggerFactory} to use for logging.
+   * @param routeManager the {@RouteManager} that manages all the routes.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: LoggerFactory,
+    @inject(ROUTES_DEPENDENCY_TYPES.RouteManager)
+    private readonly routeManager: RouteManager,
   ) {
     this.logger = loggerFactory.getLogger(this.constructor.name);
     this.expressApp = express();
@@ -62,6 +66,8 @@ export class VTTServerImpl implements VTTServer {
     process.on('SIGBREAK', this.exit);
 
     this.server = http.createServer(this.expressApp);
+
+    this.addRoutes();
   };
 
   /**
@@ -73,5 +79,9 @@ export class VTTServerImpl implements VTTServer {
       await this.server.close();
       this.server = undefined;
     }
+  };
+
+  private addRoutes = () => {
+    this.routeManager.addRoutes(this.expressApp);
   };
 }
