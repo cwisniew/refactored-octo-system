@@ -13,6 +13,10 @@ import {
 import { default as express, Express } from 'express';
 import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
+
+/**
+ * Class that implements the server
+ */
 @injectable()
 export class VTTServerImpl implements VTTServer {
   /**
@@ -68,6 +72,10 @@ export class VTTServerImpl implements VTTServer {
     this.server = http.createServer(this.expressApp);
 
     this.addRoutes();
+
+    this.server.listen(this.port, () => {
+      this.logger.info(`Server is running on port ${this.port}`);
+    });
   };
 
   /**

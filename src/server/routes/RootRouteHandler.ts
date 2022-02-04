@@ -12,6 +12,9 @@ import {
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
 
+/**
+ * The handler for the root route.
+ */
 @injectable()
 export class RootRouteHandler implements RouteHandler {
   private readonly logger: Logger;

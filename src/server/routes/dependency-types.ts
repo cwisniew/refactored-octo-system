@@ -4,7 +4,7 @@
  */
 
 /**
- * Dependency Types for route hndlers.
+ * Dependency Types for route handlers.
  */
 export const ROUTES_DEPENDENCY_TYPES = {
   /** The class that manages all the route handlers. */

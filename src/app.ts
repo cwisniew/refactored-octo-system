@@ -9,6 +9,7 @@ import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
 const vttServer = dependencyContainer.get<VTTServer>(
   SERVER_DEPENDENCY_TYPES.VTTServer,
 );
-const run = async () => {
+
+(async () => {
   await vttServer.start();
-}();
+})();

@@ -21,6 +21,10 @@ export class RouteManagerImpl implements RouteManager {
   private readonly logger: Logger;
   private readonly routeHandlers: RouteHandler[] = [];
 
+  /**
+   * Creates a new route manager implementation.
+   * @param loggerFactory the logger factory to create logging objects.
+   */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: LoggerFactory,

@@ -8,6 +8,7 @@ import { dependencyContainer } from '../utils/dependency-injection';
 import { VTTServerImpl } from './VTTServerImpl';
 import { VTTServer } from './VTTServer';
 
+/** Only bind the server if it has not been bound before. */
 if (!dependencyContainer.isBound(SERVER_DEPENDENCY_TYPES.VTTServer)) {
   dependencyContainer
     .bind<VTTServer>(SERVER_DEPENDENCY_TYPES.VTTServer)
