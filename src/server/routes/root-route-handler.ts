@@ -3,7 +3,7 @@
  * license TBD
  */
 
-import { RouteHandler } from './RouteHandler';
+import { RouteHandler } from './route-handler';
 import {
   Logger,
   LoggerFactory,

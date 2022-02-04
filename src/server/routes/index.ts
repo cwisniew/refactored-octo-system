@@ -5,10 +5,10 @@
 
 import { dependencyContainer } from '../../utils/dependency-injection';
 import { ROUTES_DEPENDENCY_TYPES } from './dependency-types';
-import { RouteHandler } from './RouteHandler';
-import { RootRouteHandler } from './RootRouteHandler';
-import { RouteManager } from './RouteManager';
-import { RouteManagerImpl } from './RouteManagerImpl';
+import { RouteHandler } from './route-handler';
+import { RootRouteHandler } from './root-route-handler';
+import { RouteManager } from './route-manager';
+import { RouteManagerImpl } from './route-manager-impl';
 
 /**
  * Create the binding for {@link RouteManager} and any {@link RouteHandler} objects.
@@ -50,5 +50,5 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
     });
 }
 
-export type { RouteManager } from './RouteManager';
+export type { RouteManager } from './route-manager';
 export { ROUTES_DEPENDENCY_TYPES } from './dependency-types';

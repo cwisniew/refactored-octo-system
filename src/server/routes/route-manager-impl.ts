@@ -3,13 +3,13 @@
  * license TBD
  */
 
-import { RouteHandler } from './RouteHandler';
+import { RouteHandler } from './route-handler';
 import {
   Logger,
   LoggerFactory,
   LOGGING_DEPENDENCY_TYPES,
 } from '../../utils/logging';
-import { RouteManager } from './RouteManager';
+import { RouteManager } from './route-manager';
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
 

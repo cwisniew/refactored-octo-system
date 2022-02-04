@@ -4,9 +4,9 @@
  */
 
 import { dependencyContainer } from '../dependency-injection';
-import { LoggerFactory } from './LoggerFactory';
+import { LoggerFactory } from './logger-factory';
 import { LOGGING_DEPENDENCY_TYPES } from './dependency-types';
-import { LoggerFactoryImpl } from './LoggerFactoryImpl';
+import { LoggerFactoryImpl } from './logger-factory-impl';
 
 /*
  * Bind
@@ -19,5 +19,5 @@ if (!dependencyContainer.isBound(LOGGING_DEPENDENCY_TYPES.LoggerFactory)) {
 }
 
 export { LOGGING_DEPENDENCY_TYPES } from './dependency-types';
-export type { LoggerFactory } from './LoggerFactory';
-export type { Logger } from './Logger';
+export type { LoggerFactory } from './logger-factory';
+export type { Logger } from './logger';

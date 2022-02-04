@@ -3,7 +3,7 @@
  * license TBD
  */
 
-import { VTTServer } from './VTTServer';
+import { VTTServer } from './vtt-server';
 import { inject, injectable } from 'inversify';
 import {
   Logger,
@@ -18,7 +18,7 @@ import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
  * Class that implements the server
  */
 @injectable()
-export class VTTServerImpl implements VTTServer {
+export class VttServerImpl implements VTTServer {
   /**
    * The express application object.
    * @private
@@ -44,7 +44,7 @@ export class VTTServerImpl implements VTTServer {
   private server?: http.Server;
 
   /**
-   * Creates a new instance of the VTTServerImpl class.
+   * Creates a new instance of the VttServerImpl class.
    * @param loggerFactory The {@LoggerFactory} to use for logging.
    * @param routeManager the {@RouteManager} that manages all the routes.
    */

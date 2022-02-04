@@ -3,7 +3,7 @@
  * license TBD
  */
 
-import { Logger } from './Logger';
+import { Logger } from './logger';
 
 /**
  * Interface for a factory that creates loggers.

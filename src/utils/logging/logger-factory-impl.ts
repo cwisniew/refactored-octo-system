@@ -5,8 +5,8 @@
 
 import { default as winston } from 'winston';
 import { injectable } from 'inversify';
-import { LoggerFactory } from './LoggerFactory';
-import { Logger } from './Logger';
+import { LoggerFactory } from './logger-factory';
+import { Logger } from './logger';
 
 /**
  * The logger factory implementation.
