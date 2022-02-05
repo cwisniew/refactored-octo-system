@@ -1,0 +1,6 @@
+{
+  "server": {
+    "started": "Server started on port {{port}}",
+    "exiting": "Server exiting..."
+  }
+}
