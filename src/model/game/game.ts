@@ -12,7 +12,7 @@ export interface Game {
   /**
    * Returns the current {@Campaign} of the game.
    */
-  getCampaign(): Campaign | undefined;
+  getCampaign(): Campaign;
 
   /**
    * Sets the current {@Campaign} from the game.

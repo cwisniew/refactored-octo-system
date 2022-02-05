@@ -9,9 +9,8 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
-import { I18N_DEPENDENCY_TYPES } from '../utils/i81n';
+import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i81n';
 import { i18n } from 'i18next';
-import { I18NProvider } from '../utils/i81n/i18n-provider';
 
 /**
  * Class that implements the server
@@ -95,6 +94,9 @@ export class VttServerImpl implements VTTServer {
     }
   };
 
+  /**
+   * Adds the routes to the server.
+   */
   private addRoutes = () => {
     this.routeManager.addRoutes(this.expressApp);
   };

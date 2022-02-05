@@ -2,5 +2,13 @@
   "server": {
     "started": "Server started on port {{port}}",
     "exiting": "Server exiting..."
+  },
+  "campaign": {
+    "starter": {
+      "name": "New Campaign"
+    },
+    "debug": {
+      "created": "New Campaign object created"
+    }
   }
 }

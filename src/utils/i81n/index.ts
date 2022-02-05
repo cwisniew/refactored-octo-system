@@ -17,3 +17,4 @@ if (!dependencyContainer.isBound(I18N_DEPENDENCY_TYPES.I18N)) {
 }
 
 export { I18N_DEPENDENCY_TYPES };
+export type { I18NProvider };
