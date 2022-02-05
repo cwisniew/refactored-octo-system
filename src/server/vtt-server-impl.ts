@@ -19,7 +19,7 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
-import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i81n';
+import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { i18n } from 'i18next';
 
 /**
@@ -39,6 +39,10 @@ export class VttServerImpl implements VTTServer {
    */
   private readonly port: number;
 
+  /**
+   * Object used for translations.
+   * @private
+   */
   private readonly i18n: i18n;
 
   /**

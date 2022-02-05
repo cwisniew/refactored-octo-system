@@ -14,13 +14,9 @@
  */
 
 /**
- * Dependency Types for route handlers.
+ * The Dependency types for the game object.
  */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
+export const GAME_DEPENDENCY_TYPES = {
+  /** The Game Object. */
+  Game: Symbol.for('Game'),
 };

@@ -13,11 +13,23 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export interface CampaignData {
-  name: string;
-  formatVersion: string;
-}
+/**
+ * Interface for game maps.
+ */
+export interface GameMap {
+  /**
+   * Returns the id of the map.
+   */
+  getId(): string;
 
-export interface CampaignView {
-  getCampaignData(): CampaignData;
+  /**
+   * Returns the name of the map.
+   */
+  getName(): string;
+
+  /**
+   * Sets the name of the game map.
+   * @param name the name of the game map.
+   */
+  setName(name: string): void;
 }

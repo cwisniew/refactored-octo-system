@@ -55,4 +55,12 @@ export class RouteManagerImpl implements RouteManager {
   registerRouteHandler = (routes: RouteHandler): void => {
     this.routeHandlers.push(routes);
   };
+
+  /**
+   * Registers multiple route handlers to the route manager.
+   * @param routes the route handlers to register.
+   */
+  registerRouteHandlers(routes: RouteHandler[]): void {
+    routes.forEach((r) => this.registerRouteHandler(r));
+  }
 }

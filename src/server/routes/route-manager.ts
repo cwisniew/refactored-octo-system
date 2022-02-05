@@ -28,7 +28,13 @@ export interface RouteManager {
 
   /**
    * Registers a route handler to the route manager.
-   * @param routes
+   * @param routes the route handler to register.
    */
   registerRouteHandler(routes: RouteHandler): void;
+
+  /**
+   * Registers multiple route handlers to the route manager.
+   * @param routes the route handlers to register.
+   */
+  registerRouteHandlers(routes: RouteHandler[]): void;
 }

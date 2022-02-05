@@ -13,6 +13,8 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { GameMap } from '../game-map';
+
 /**
  * Interface used for Campaign objects.
  */
@@ -43,4 +45,22 @@ export interface Campaign {
    * Returns the version of the campaign format.
    */
   getFormatVersion(): string;
+
+  /**
+   * Returns ids of the game maps for this campaign.
+   */
+  getMapIds(): string[];
+
+  /**
+   * Adds a game map to the campaign
+   * @param gameMap the {@link GameMap} to add to the campaign.
+   */
+  addGameMap(gameMap: GameMap): void;
+
+  /**
+   * Removes a game map from the campaign.
+   * @param gameMap either a string which is treated as the id of the {@link GameMap}
+   * or the actual {@link GameMap} to remove.
+   */
+  removeGameMap(gameMap: string | GameMap): void;
 }

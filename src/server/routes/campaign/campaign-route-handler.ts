@@ -13,46 +13,55 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from './route-handler';
-import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
-import { inject, injectable } from 'inversify';
+import { RouteHandler } from '../route-handler';
 import { Express } from 'express';
-import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
+import { inject, injectable } from 'inversify';
+import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../../utils/logging';
+import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../../utils/i18n';
 import { i18n } from 'i18next';
+import {
+  CampaignView,
+  CAMPAIGN_VIEW_DEPENDENCY_TYPES,
+} from '../../../view/campaign';
+import { Game, GAME_DEPENDENCY_TYPES } from '../../../model/game';
 
-/**
- * The handler for the root route.
- */
 @injectable()
-export class RootRouteHandler implements RouteHandler {
+export class CampaignRouteHandler implements RouteHandler {
   /** Object used to log messages. */
   private readonly logger: Logger;
 
   /** Object for translation. */
   private readonly i18n: i18n;
-
   /**
    * Create a new RootRouteHandler.
    * @param loggerFactory the factory used to create logging objects.
    * @param i18nProvider provider for the translation object.
+   * @param campaignView the view for the campaign.
+   * @param game the running game.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
+    @inject(CAMPAIGN_VIEW_DEPENDENCY_TYPES.CampaignView)
+    private readonly campaignView: CampaignView,
+    @inject(GAME_DEPENDENCY_TYPES.Game)
+    private readonly game: Game,
   ) {
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
   }
 
   /**
-   * Add the routes to the express app.
+   * Adds routes for the campaign object to the express app.
    * @param expressApp the express app to add the routes to.
    */
   addRoutes(expressApp: Express): void {
-    this.logger.debug(this.i18n.t('server.debug.route.add', { path: '/' }));
-    expressApp.get('/', (req, res) => {
-      res.send('<h2>Hello World...</h2>');
+    this.logger.debug(
+      this.i18n.t('server.debug.route.add', { path: '/campaign' }),
+    );
+    expressApp.get('/campaign', (req, res) => {
+      res.send(this.campaignView.getCampaignData(this.game.getCampaign()));
     });
   }
 }

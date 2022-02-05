@@ -17,6 +17,8 @@ import { Campaign } from './campaign';
 import { dependencyContainer } from '../../utils/dependency-injection';
 import { interfaces } from 'inversify';
 import { CAMPAIGN_DEPENDENCY_TYPES } from './dependency-types';
+import { GameMap, GAME_MAP_DEPENDENCY_TYPES } from '../game-map';
+import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
 
 /**
  * Factory for creating a "starter" campaign.
@@ -26,12 +28,24 @@ export const registerStarterCampaignFactory = (): void => {
     .bind<interfaces.Factory<Campaign>>(
       CAMPAIGN_DEPENDENCY_TYPES.StarterCampaignFactory,
     )
-    .toFactory<Campaign, ['Unnamed']>((context: interfaces.Context) => {
+    .toFactory<Campaign, [name: string]>((context: interfaces.Context) => {
       return (campaignName: string) => {
+        const i18nProvider: I18NProvider = context.container.get<I18NProvider>(
+          I18N_DEPENDENCY_TYPES.I18N,
+        );
+
+        const i18n = i18nProvider.i18n();
+
         const campaign = context.container.get<Campaign>(
           CAMPAIGN_DEPENDENCY_TYPES.Campaign,
         );
         campaign.setName(campaignName);
+
+        const gameMapFactory: (name: string) => GameMap = context.container.get(
+          GAME_MAP_DEPENDENCY_TYPES.StarterGameMapFactory,
+        );
+        const gameMap = gameMapFactory(i18n.t('gamemap.starter.name'));
+        campaign.addGameMap(gameMap);
         return campaign;
       };
     });

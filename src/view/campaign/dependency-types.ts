@@ -14,13 +14,9 @@
  */
 
 /**
- * Dependency Types for route handlers.
+ * Dependency types for campaign views.
  */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
+export const CAMPAIGN_VIEW_DEPENDENCY_TYPES = {
+  /** The campaign view. */
+  CampaignView: Symbol.for('CampaignView'),
 };

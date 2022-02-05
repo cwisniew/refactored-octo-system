@@ -13,14 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-/**
- * Dependency Types for route handlers.
- */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
-};
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { GAME_DEPENDENCY_TYPES } from './dependency-types';
+import { Game } from './game';
+import { GameImpl } from './game-impl';
+
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(GAME_DEPENDENCY_TYPES.Game)) {
+  dependencyContainer
+    .bind<Game>(GAME_DEPENDENCY_TYPES.Game)
+    .to(GameImpl)
+    .inSingletonScope();
+}
+
+export { GAME_DEPENDENCY_TYPES };
+export type { Game };

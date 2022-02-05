@@ -13,14 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-/**
- * Dependency Types for route handlers.
- */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
-};
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { CampaignView } from './campaign-view';
+import { CampaignViewImpl } from './campaign-view-impl';
+import { CAMPAIGN_VIEW_DEPENDENCY_TYPES } from './dependency-types';
+
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(CAMPAIGN_VIEW_DEPENDENCY_TYPES.CampaignView)) {
+  dependencyContainer
+    .bind<CampaignView>(CAMPAIGN_VIEW_DEPENDENCY_TYPES.CampaignView)
+    .to(CampaignViewImpl)
+    .inSingletonScope();
+}
+
+export { CAMPAIGN_VIEW_DEPENDENCY_TYPES };
+export type { CampaignView };

@@ -19,6 +19,7 @@ import { RouteHandler } from './route-handler';
 import { RootRouteHandler } from './root-route-handler';
 import { RouteManager } from './route-manager';
 import { RouteManagerImpl } from './route-manager-impl';
+import { CampaignRouteHandler } from './campaign/campaign-route-handler';
 
 /**
  * Create the binding for {@link RouteManager} and any {@link RouteHandler} objects.
@@ -48,15 +49,30 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
     .inSingletonScope();
 
   dependencyContainer
+    .bind<RouteHandler>(ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler)
+    .to(CampaignRouteHandler)
+    .inSingletonScope();
+
+  dependencyContainer
     .bind<RouteManager>(ROUTES_DEPENDENCY_TYPES.RouteManager)
     .to(RouteManagerImpl)
     .inSingletonScope()
-    .onActivation((context, routeHandler): RouteManager => {
-      const rootRouteHandler = context.container.get<RouteHandler>(
-        ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
+    .onActivation((context, routeManager): RouteManager => {
+      const routeHandlers: RouteHandler[] = [];
+      routeHandlers.push(
+        context.container.get<RouteHandler>(
+          ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
+        ),
       );
-      routeHandler.registerRouteHandler(rootRouteHandler);
-      return routeHandler;
+
+      routeHandlers.push(
+        context.container.get<RouteHandler>(
+          ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler,
+        ),
+      );
+
+      routeManager.registerRouteHandlers(routeHandlers);
+      return routeManager;
     });
 }
 

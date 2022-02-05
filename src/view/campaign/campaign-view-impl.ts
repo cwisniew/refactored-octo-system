@@ -13,14 +13,21 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { Campaign } from '../../model/campaign';
+import { CampaignData, CampaignView } from './campaign-view';
+import { injectable } from 'inversify';
+
 /**
- * Dependency Types for route handlers.
+ * Extracts data from a {@link Campaign} object.
  */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
-};
+@injectable()
+export class CampaignViewImpl implements CampaignView {
+  getCampaignData(campaign: Campaign): CampaignData {
+    return {
+      id: campaign.getId(),
+      name: campaign.getName(),
+      formatVersion: campaign.getFormatVersion(),
+      gameMaps: campaign.getMapIds(),
+    };
+  }
+}

@@ -14,13 +14,11 @@
  */
 
 /**
- * Dependency Types for route handlers.
+ * Types for game map dependency injection
  */
-export const ROUTES_DEPENDENCY_TYPES = {
-  /** The class that manages all the route handlers. */
-  RouteManager: Symbol.for('RouteManager'),
-  /** The root route handler. */
-  RootRouteHandler: Symbol.for('RootRouteHandler'),
-  /** The Campaign Route handler. */
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
+export const GAME_MAP_DEPENDENCY_TYPES = {
+  /** Game Maps. */
+  GameMap: Symbol.for('GameMap'),
+  /** Factory for creating starter game maps. */
+  StarterGameMapFactory: Symbol.for('Factory<GameMap>'),
 };
