@@ -17,7 +17,7 @@ import { Campaign } from './campaign';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { IdGen, ID_GEN_DEPENDENCY_TYPES } from '../../utils/id';
-import { GameMap } from '../game-map';
+import { GameMap, GameMapStore, GAME_MAP_DEPENDENCY_TYPES } from '../game-map';
 import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
 import { i18n } from 'i18next';
 
@@ -59,22 +59,19 @@ export class CampaignImpl implements Campaign {
   private formatVersion: string;
 
   /**
-   * The game maps for the campaign.
-   * @private
-   */
-  private readonly gameMaps: Map<string, GameMap> = new Map();
-
-  /**
    * Creates a new campaign.
    * @param loggerFactory the factory for creating logging objects.
    * @param idGen class used to generate ids.
    * @param i18nProvider the provider to get translation objects.
+   * @param gameMapStore the storage for the game maps.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(ID_GEN_DEPENDENCY_TYPES.IdGen) idGen: IdGen,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
+    @inject(GAME_MAP_DEPENDENCY_TYPES.GameMapStore)
+    private readonly gameMapStore: GameMapStore,
   ) {
     this.id = idGen.id();
     this.logger = loggerFactory(this.constructor.name);
@@ -125,7 +122,7 @@ export class CampaignImpl implements Campaign {
    * Returns ids of the game maps for this campaign.
    */
   getMapIds(): string[] {
-    return Array.from(this.gameMaps.keys());
+    return this.gameMapStore.getMapIds();
   }
 
   /**
@@ -133,7 +130,7 @@ export class CampaignImpl implements Campaign {
    * @param gameMap the {@link GameMap} to add to the campaign.
    */
   addGameMap(gameMap: GameMap): void {
-    this.gameMaps.set(gameMap.getId(), gameMap);
+    this.gameMapStore.addGameMap(gameMap);
   }
 
   /**
@@ -142,12 +139,6 @@ export class CampaignImpl implements Campaign {
    * {@link GameMap} or the actual {@link GameMap} to remove.
    */
   removeGameMap(gameMap: string | GameMap): void {
-    let key = '';
-    if (typeof gameMap === 'string') {
-      key = gameMap;
-    } else {
-      key = gameMap.getId();
-    }
-    this.gameMaps.delete(key);
+    this.gameMapStore.removeGameMap(gameMap);
   }
 }

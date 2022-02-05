@@ -23,4 +23,6 @@ export const ROUTES_DEPENDENCY_TYPES = {
   RootRouteHandler: Symbol.for('RootRouteHandler'),
   /** The Campaign Route handler. */
   CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
+  /** The Game Map Route handler. */
+  GameMapRouteHandler: Symbol.for('GameMapRouteHandler'),
 };

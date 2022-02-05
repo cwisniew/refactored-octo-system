@@ -6,6 +6,9 @@
       "route": {
         "add": "New route added for {{- path}}"
       }
+    },
+    "request": {
+      "unknownId": "Request for unknown {{what}}, id = {{id}}"
     }
   },
   "campaign": {

@@ -14,13 +14,9 @@
  */
 
 /**
- * Types for game map dependency injection
+ * Dependency types for game map views.
  */
-export const GAME_MAP_DEPENDENCY_TYPES = {
-  /** Game Maps. */
-  GameMap: Symbol.for('GameMap'),
-  /** Factory for creating starter game maps. */
-  StarterGameMapFactory: Symbol.for('Factory<GameMap>'),
-  /** Storage for Game Maps. */
-  GameMapStore: Symbol.for('GameMapStore'),
+export const GAME_MAP_VIEW_DEPENDENCY_TYPES = {
+  /** The game map view. */
+  GameMapView: Symbol.for('GameMapView'),
 };
