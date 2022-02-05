@@ -13,14 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-/**
- * Types for game map dependency injection
- */
-export const GAME_MAP_DEPENDENCY_TYPES = {
-  /** Game Maps. */
-  GameMap: Symbol.for('GameMap'),
-  /** Factory for creating starter game maps. */
-  StarterGameMapFactory: Symbol.for('Factory<GameMap>'),
-  /** Storage for Game Maps. */
-  GameMapStore: Symbol.for('GameMapStore'),
-};
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './dependency-types';
+import { GameMapView } from './game-map-view';
+import { GameMapViewImpl } from './game-map-view-impl';
+
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)) {
+  dependencyContainer
+    .bind<GameMapView>(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)
+    .to(GameMapViewImpl)
+    .inSingletonScope();
+}
+
+export { GAME_MAP_VIEW_DEPENDENCY_TYPES };
+export type { GameMapView };

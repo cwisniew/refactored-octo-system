@@ -17,6 +17,8 @@ import { dependencyContainer } from '../../utils/dependency-injection';
 import { GAME_MAP_DEPENDENCY_TYPES } from './dependency-types';
 import { GameMap } from './game-map';
 import { GameMapImpl } from './game-map-impl';
+import { GameMapStore } from './game-map-store';
+import { GameMapStoreImpl } from './game-map-store-impl';
 import { registerStartMapFactory } from './starter-game-map-factory';
 
 /* Only bind campaign if it is not already bound. */
@@ -26,8 +28,14 @@ if (!dependencyContainer.isBound(GAME_MAP_DEPENDENCY_TYPES.GameMap)) {
     .to(GameMapImpl)
     .inSingletonScope();
 
+  dependencyContainer
+    .bind<GameMapStore>(GAME_MAP_DEPENDENCY_TYPES.GameMapStore)
+    .to(GameMapStoreImpl)
+    .inSingletonScope();
+
   registerStartMapFactory();
 }
 
 export type { GameMap };
+export type { GameMapStore };
 export { GAME_MAP_DEPENDENCY_TYPES };
