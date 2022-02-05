@@ -14,11 +14,11 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * Types for game map dependency injection
  */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
-}
+export const GAME_MAP_DEPENDENCY_TYPES = {
+  /** Game Maps. */
+  GameMap: Symbol.for('GameMap'),
+  /** Factory for creating starter game maps. */
+  StarterGameMapFactory: Symbol.for('Factory<GameMap>'),
+};

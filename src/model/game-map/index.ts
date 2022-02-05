@@ -13,18 +13,21 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { SERVER_DEPENDENCY_TYPES } from './dependency-types';
-import { dependencyContainer } from '../utils/dependency-injection';
-import { VttServerImpl } from './vtt-server-impl';
-import { VTTServer } from './vtt-server';
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { GAME_MAP_DEPENDENCY_TYPES } from './dependency-types';
+import { GameMap } from './game-map';
+import { GameMapImpl } from './game-map-impl';
+import { registerStartMapFactory } from './starter-game-map-factory';
 
-/** Only bind the server if it has not been bound before. */
-if (!dependencyContainer.isBound(SERVER_DEPENDENCY_TYPES.VTTServer)) {
+/* Only bind campaign if it is not already bound. */
+if (!dependencyContainer.isBound(GAME_MAP_DEPENDENCY_TYPES.GameMap)) {
   dependencyContainer
-    .bind<VTTServer>(SERVER_DEPENDENCY_TYPES.VTTServer)
-    .to(VttServerImpl)
-    .inRequestScope();
+    .bind<GameMap>(GAME_MAP_DEPENDENCY_TYPES.GameMap)
+    .to(GameMapImpl)
+    .inSingletonScope();
+
+  registerStartMapFactory();
 }
 
-export type { VTTServer };
-export { SERVER_DEPENDENCY_TYPES };
+export type { GameMap };
+export { GAME_MAP_DEPENDENCY_TYPES };

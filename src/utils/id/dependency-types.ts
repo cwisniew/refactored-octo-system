@@ -14,11 +14,9 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * Constants for ID Generation dependency injection
  */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
-}
+export const ID_GEN_DEPENDENCY_TYPES = {
+  /** The ID Generator. */
+  IdGen: Symbol.for('IDGen'),
+};

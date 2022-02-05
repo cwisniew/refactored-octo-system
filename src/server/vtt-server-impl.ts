@@ -1,6 +1,16 @@
 /*
- * This software Copyright by Craig Wisniewski
- * license TBD
+ * This software Copyright Craig Wisniewski, and
+ * licensed under the Affero GPL Version 3 or, at your option, any later
+ * version.
+ *
+ * MapTool Source Code is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License * along with this source Code.  If not, please visit
+ * <http://www.gnu.org/licenses/> and specifically the Affero license
+ * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
 import { VTTServer } from './vtt-server';
@@ -9,9 +19,8 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
-import { I18N_DEPENDENCY_TYPES } from '../utils/i81n';
+import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { i18n } from 'i18next';
-import { I18NProvider } from '../utils/i81n/i18n-provider';
 
 /**
  * Class that implements the server
@@ -30,6 +39,10 @@ export class VttServerImpl implements VTTServer {
    */
   private readonly port: number;
 
+  /**
+   * Object used for translations.
+   * @private
+   */
   private readonly i18n: i18n;
 
   /**
@@ -95,6 +108,9 @@ export class VttServerImpl implements VTTServer {
     }
   };
 
+  /**
+   * Adds the routes to the server.
+   */
   private addRoutes = () => {
     this.routeManager.addRoutes(this.expressApp);
   };

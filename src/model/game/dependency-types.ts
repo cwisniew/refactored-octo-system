@@ -14,11 +14,9 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * The Dependency types for the game object.
  */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
-}
+export const GAME_DEPENDENCY_TYPES = {
+  /** The Game Object. */
+  Game: Symbol.for('Game'),
+};

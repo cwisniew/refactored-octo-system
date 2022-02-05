@@ -13,12 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-/**
- * Interface for the VTTServer class.
- */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { GAME_DEPENDENCY_TYPES } from './dependency-types';
+import { Game } from './game';
+import { GameImpl } from './game-impl';
+
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(GAME_DEPENDENCY_TYPES.Game)) {
+  dependencyContainer
+    .bind<Game>(GAME_DEPENDENCY_TYPES.Game)
+    .to(GameImpl)
+    .inSingletonScope();
 }
+
+export { GAME_DEPENDENCY_TYPES };
+export type { Game };

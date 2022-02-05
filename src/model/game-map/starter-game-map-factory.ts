@@ -13,21 +13,22 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { interfaces } from 'inversify';
+import { GameMap, GAME_MAP_DEPENDENCY_TYPES } from '.';
 import { dependencyContainer } from '../../utils/dependency-injection';
-import { CAMPAIGN_DEPENDENCY_TYPES } from './dependency-types';
-import { Campaign } from './campaign';
-import { CampaignImpl } from './campaign-impl';
-import { registerStarterCampaignFactory } from './starter-campaign-factory';
 
-/* Only bind campaign if it is not already bound. */
-if (!dependencyContainer.isBound(CAMPAIGN_DEPENDENCY_TYPES.Campaign)) {
+export const registerStartMapFactory = (): void => {
   dependencyContainer
-    .bind<Campaign>(CAMPAIGN_DEPENDENCY_TYPES.Campaign)
-    .to(CampaignImpl)
-    .inSingletonScope();
-
-  registerStarterCampaignFactory();
-}
-
-export type { Campaign };
-export { CAMPAIGN_DEPENDENCY_TYPES };
+    .bind<interfaces.Factory<GameMap>>(
+      GAME_MAP_DEPENDENCY_TYPES.StarterGameMapFactory,
+    )
+    .toFactory<GameMap, [name: string]>((context: interfaces.Context) => {
+      return (mapName: string) => {
+        const gamemap = context.container.get<GameMap>(
+          GAME_MAP_DEPENDENCY_TYPES.GameMap,
+        );
+        gamemap.setName(mapName);
+        return gamemap;
+      };
+    });
+};

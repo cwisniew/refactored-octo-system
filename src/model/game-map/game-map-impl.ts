@@ -13,64 +13,80 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Game } from './game';
-import { Campaign, CAMPAIGN_DEPENDENCY_TYPES } from '../campaign';
+import { GameMap } from './game-map';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { inject, injectable } from 'inversify';
-import { i18n } from 'i18next';
+import { ID_GEN_DEPENDENCY_TYPES, IdGen } from '../../utils/id';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
+import { i18n } from 'i18next';
 
 /**
- * Class that represents the running game.
+ * Class that represents a game map.
  */
 @injectable()
-export class GameImpl implements Game {
+export class GameMapImpl implements GameMap {
   /**
-   * Logger used to log messages.
+   * The id of the game map.
+   * @private
+   */
+  private readonly id: string;
+
+  /**
+   * Logger used for logging messages.
    * @private
    */
   private readonly logger: Logger;
+
   /**
-   * i18n object used for translations.
+   * Object used for translations.
    * @private
    */
   private readonly i18n: i18n;
-  /**
-   * The current campaign.
-   * @private
-   */
-  private campaign: Campaign;
 
   /**
-   * Creates a new {@link GameImpl} object.
-   * @param loggerFactory factory to create the logging object.
-   * @param campaignFactory factory to create the initial campaign.
-   * @param i18nProvider provider to retrieve the i18n translation object.
+   * The name of the game map.
+   * @private
+   */
+  private name: string;
+
+  /**
+   * Creates a new game map.
+   * @param loggerFactory the factory for creating logging objects.
+   * @param idGen class used to generate ids.
+   * @param i18nProvider the provider to get translation objects.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
-    @inject(CAMPAIGN_DEPENDENCY_TYPES.StarterCampaignFactory)
-    campaignFactory: (name: string) => Campaign,
+    @inject(ID_GEN_DEPENDENCY_TYPES.IdGen) idGen: IdGen,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
   ) {
+    this.id = idGen.id();
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
-    this.campaign = campaignFactory(this.i18n.t('campaign.starter.name'));
+    this.name = '';
+    this.logger.debug(this.i18n.t('gamemap.debug.created', { id: this.id }));
   }
 
   /**
-   * Returns the current {@Campaign} of the game.
+   * Returns the id of the map.
    */
-  getCampaign(): Campaign {
-    return this.campaign;
+  getId(): string {
+    return this.id;
   }
 
   /**
-   * Sets the current {@Campaign} from the game.
-   * @param campaign
+   * Returns the name of the map.
    */
-  setCampaign(campaign: Campaign): void {
-    this.campaign = campaign;
+  getName(): string {
+    return this.name;
+  }
+
+  /**
+   * Sets the name of the game map.
+   * @param name the name of the game map.
+   */
+  setName(name: string): void {
+    this.name = name;
   }
 }

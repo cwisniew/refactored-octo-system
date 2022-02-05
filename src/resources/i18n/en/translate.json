@@ -1,6 +1,27 @@
 {
   "server": {
     "started": "Server started on port {{port}}",
-    "exiting": "Server exiting..."
+    "exiting": "Server exiting...",
+    "debug": {
+      "route": {
+        "add": "New route added for {{- path}}"
+      }
+    }
+  },
+  "campaign": {
+    "starter": {
+      "name": "New Campaign"
+    },
+    "debug": {
+      "created": "New Campaign object created with id = {{id}}"
+    }
+  },
+  "gamemap": {
+    "starter": {
+      "name": "New Map"
+    },
+    "debug": {
+      "created": "game map created with id = {{id}}"
+    }
   }
 }

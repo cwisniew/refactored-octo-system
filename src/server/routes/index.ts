@@ -1,6 +1,16 @@
 /*
- * This software Copyright by Craig Wisniewski
- * license TBD
+ * This software Copyright Craig Wisniewski, and
+ * licensed under the Affero GPL Version 3 or, at your option, any later
+ * version.
+ *
+ * MapTool Source Code is distributed in the hope that it will be
+ * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License * along with this source Code.  If not, please visit
+ * <http://www.gnu.org/licenses/> and specifically the Affero license
+ * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
 import { dependencyContainer } from '../../utils/dependency-injection';
@@ -9,6 +19,7 @@ import { RouteHandler } from './route-handler';
 import { RootRouteHandler } from './root-route-handler';
 import { RouteManager } from './route-manager';
 import { RouteManagerImpl } from './route-manager-impl';
+import { CampaignRouteHandler } from './campaign/campaign-route-handler';
 
 /**
  * Create the binding for {@link RouteManager} and any {@link RouteHandler} objects.
@@ -38,15 +49,30 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
     .inSingletonScope();
 
   dependencyContainer
+    .bind<RouteHandler>(ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler)
+    .to(CampaignRouteHandler)
+    .inSingletonScope();
+
+  dependencyContainer
     .bind<RouteManager>(ROUTES_DEPENDENCY_TYPES.RouteManager)
     .to(RouteManagerImpl)
     .inSingletonScope()
-    .onActivation((context, routeHandler): RouteManager => {
-      const rootRouteHandler = context.container.get<RouteHandler>(
-        ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
+    .onActivation((context, routeManager): RouteManager => {
+      const routeHandlers: RouteHandler[] = [];
+      routeHandlers.push(
+        context.container.get<RouteHandler>(
+          ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
+        ),
       );
-      routeHandler.registerRouteHandler(rootRouteHandler);
-      return routeHandler;
+
+      routeHandlers.push(
+        context.container.get<RouteHandler>(
+          ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler,
+        ),
+      );
+
+      routeManager.registerRouteHandlers(routeHandlers);
+      return routeManager;
     });
 }
 

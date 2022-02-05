@@ -13,12 +13,14 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { i18n as i18nInstance } from 'i18next';
+
 /**
- * Interface for the VTTServer class.
+ * Interface for a provider for a configured i18n instance.
  */
-export interface VTTServer {
+export interface I18NProvider {
   /**
-   * Starts the server.
+   * Returns a configured i18n instance
    */
-  start(): Promise<void>;
+  i18n(): i18nInstance;
 }

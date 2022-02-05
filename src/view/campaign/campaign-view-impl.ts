@@ -13,12 +13,21 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { Campaign } from '../../model/campaign';
+import { CampaignData, CampaignView } from './campaign-view';
+import { injectable } from 'inversify';
+
 /**
- * Interface for the VTTServer class.
+ * Extracts data from a {@link Campaign} object.
  */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
+@injectable()
+export class CampaignViewImpl implements CampaignView {
+  getCampaignData(campaign: Campaign): CampaignData {
+    return {
+      id: campaign.getId(),
+      name: campaign.getName(),
+      formatVersion: campaign.getFormatVersion(),
+      gameMaps: campaign.getMapIds(),
+    };
+  }
 }

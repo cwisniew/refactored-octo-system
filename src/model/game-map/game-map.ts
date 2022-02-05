@@ -14,11 +14,22 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * Interface for game maps.
  */
-export interface VTTServer {
+export interface GameMap {
   /**
-   * Starts the server.
+   * Returns the id of the map.
    */
-  start(): Promise<void>;
+  getId(): string;
+
+  /**
+   * Returns the name of the map.
+   */
+  getName(): string;
+
+  /**
+   * Sets the name of the game map.
+   * @param name the name of the game map.
+   */
+  setName(name: string): void;
 }

@@ -13,12 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-/**
- * Interface for the VTTServer class.
- */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { CampaignView } from './campaign-view';
+import { CampaignViewImpl } from './campaign-view-impl';
+import { CAMPAIGN_VIEW_DEPENDENCY_TYPES } from './dependency-types';
+
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(CAMPAIGN_VIEW_DEPENDENCY_TYPES.CampaignView)) {
+  dependencyContainer
+    .bind<CampaignView>(CAMPAIGN_VIEW_DEPENDENCY_TYPES.CampaignView)
+    .to(CampaignViewImpl)
+    .inSingletonScope();
 }
+
+export { CAMPAIGN_VIEW_DEPENDENCY_TYPES };
+export type { CampaignView };

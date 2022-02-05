@@ -14,11 +14,9 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * Dependency types for campaign views.
  */
-export interface VTTServer {
-  /**
-   * Starts the server.
-   */
-  start(): Promise<void>;
-}
+export const CAMPAIGN_VIEW_DEPENDENCY_TYPES = {
+  /** The campaign view. */
+  CampaignView: Symbol.for('CampaignView'),
+};

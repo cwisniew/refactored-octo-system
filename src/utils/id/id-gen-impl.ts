@@ -13,12 +13,19 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { injectable } from 'inversify';
+import { v4 as uuidv4 } from 'uuid';
+import { IdGen } from './id-gen';
+
 /**
- * Interface for the VTTServer class.
+ *  Class to generate IDs.
  */
-export interface VTTServer {
+@injectable()
+export class IdGenImpl implements IdGen {
   /**
-   * Starts the server.
+   * Generate and ID.
    */
-  start(): Promise<void>;
+  id(): string {
+    return uuidv4();
+  }
 }

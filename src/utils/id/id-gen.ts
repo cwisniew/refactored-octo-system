@@ -14,11 +14,11 @@
  */
 
 /**
- * Interface for the VTTServer class.
+ * Interface for classes that generate IDs.
  */
-export interface VTTServer {
+export interface IdGen {
   /**
-   * Starts the server.
+   * Generate and ID.
    */
-  start(): Promise<void>;
+  id(): string;
 }
