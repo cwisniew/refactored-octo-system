@@ -19,10 +19,8 @@ import { GameMap } from '../game-map';
  * Interface used for Campaign objects.
  */
 export interface Campaign {
-  /**
-   * Returns the id of the campaign.
-   */
-  getId(): string;
+  /** The id of the campaign */
+  id: string;
 
   /**
    * Sets the name of the campaign.

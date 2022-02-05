@@ -67,7 +67,7 @@ export class GameMapStoreImpl implements GameMapStore {
    * @param gameMap the {@link GameMap} to add to the campaign.
    */
   addGameMap(gameMap: GameMap): void {
-    this.store.set(gameMap.getId(), gameMap);
+    this.store.set(gameMap.id, gameMap);
   }
 
   /**
@@ -80,7 +80,7 @@ export class GameMapStoreImpl implements GameMapStore {
     if (typeof gameMap === 'string') {
       key = gameMap;
     } else {
-      key = gameMap.getId();
+      key = gameMap.id;
     }
     this.store.delete(key);
   }

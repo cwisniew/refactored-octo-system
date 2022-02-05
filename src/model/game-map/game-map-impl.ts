@@ -27,9 +27,8 @@ import { i18n } from 'i18next';
 export class GameMapImpl implements GameMap {
   /**
    * The id of the game map.
-   * @private
    */
-  private readonly id: string;
+  readonly id: string;
 
   /**
    * Logger used for logging messages.
@@ -66,13 +65,6 @@ export class GameMapImpl implements GameMap {
     this.i18n = i18nProvider.i18n();
     this.name = '';
     this.logger.debug(this.i18n.t('gamemap.debug.created', { id: this.id }));
-  }
-
-  /**
-   * Returns the id of the map.
-   */
-  getId(): string {
-    return this.id;
   }
 
   /**

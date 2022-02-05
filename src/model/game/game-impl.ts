@@ -26,6 +26,11 @@ import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
 @injectable()
 export class GameImpl implements Game {
   /**
+   * The version of the VTT
+   */
+  readonly version: string = '0.0.1';
+
+  /**
    * Logger used to log messages.
    * @private
    */

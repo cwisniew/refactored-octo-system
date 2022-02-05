@@ -18,6 +18,9 @@ import enResources from '../../resources/i18n/en/translate.json';
 import { I18NProvider } from './i18n-provider';
 import { injectable } from 'inversify';
 
+/**
+ * The object used to translate.
+ */
 let i18n: i18nInstance | undefined;
 
 /**

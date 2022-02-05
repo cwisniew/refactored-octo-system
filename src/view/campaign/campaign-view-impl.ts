@@ -22,9 +22,13 @@ import { injectable } from 'inversify';
  */
 @injectable()
 export class CampaignViewImpl implements CampaignView {
+  /**
+   * Returns the campaign data.
+   * @param campaign
+   */
   getCampaignData(campaign: Campaign): CampaignData {
     return {
-      id: campaign.getId(),
+      id: campaign.id,
       name: campaign.getName(),
       formatVersion: campaign.getFormatVersion(),
       gameMaps: campaign.getMapIds(),

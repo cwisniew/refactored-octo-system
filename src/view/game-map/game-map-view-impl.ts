@@ -56,7 +56,7 @@ export class GameMapViewImpl implements GameMapView {
    */
   private extractGameMapData(gameMap: GameMap): GameMapData {
     return {
-      id: gameMap.getId(),
+      id: gameMap.id,
       name: gameMap.getName(),
     };
   }
@@ -68,7 +68,7 @@ export class GameMapViewImpl implements GameMapView {
     return {
       gameMaps: this.gameMapStore.getGameMapList().map((m) => {
         return {
-          id: m.getId(),
+          id: m.id,
           name: m.getName(),
         };
       }),

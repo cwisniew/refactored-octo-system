@@ -25,6 +25,9 @@ import {
 } from '../../../view/campaign';
 import { Game, GAME_DEPENDENCY_TYPES } from '../../../model/game';
 
+/**
+ * The route handler for the campaign route.
+ */
 @injectable()
 export class CampaignRouteHandler implements RouteHandler {
   /** Object used to log messages. */

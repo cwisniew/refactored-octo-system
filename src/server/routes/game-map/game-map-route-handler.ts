@@ -24,6 +24,9 @@ import {
   GAME_MAP_VIEW_DEPENDENCY_TYPES,
 } from '../../../view/game-map';
 
+/**
+ * The route handler for Game Maps.
+ */
 @injectable()
 export class GameMapRouteHandler implements RouteHandler {
   /** Object used to log messages. */

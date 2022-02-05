@@ -17,5 +17,6 @@
  * Dependency types for the server.
  */
 export const SERVER_DEPENDENCY_TYPES = {
+  /** The VTT Server. */
   VTTServer: Symbol.for('VTTServer'),
 };
