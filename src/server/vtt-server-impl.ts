@@ -9,6 +9,9 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
+import { I18N_DEPENDENCY_TYPES } from '../utils/i81n';
+import { i18n } from 'i18next';
+import { I18NProvider } from '../utils/i81n/i18n-provider';
 
 /**
  * Class that implements the server
@@ -19,13 +22,15 @@ export class VttServerImpl implements VTTServer {
    * The express application object.
    * @private
    */
-  private expressApp: Express;
+  private readonly expressApp: Express;
 
   /**
    * The port number to start the server on.
    * @private
    */
-  private port: number;
+  private readonly port: number;
+
+  private readonly i18n: i18n;
 
   /**
    * The {@Logger} object to use for logging.
@@ -43,16 +48,19 @@ export class VttServerImpl implements VTTServer {
    * Creates a new instance of the VttServerImpl class.
    * @param loggerFactory The factory function to create {@link Logger}s/
    * @param routeManager the {@link RouteManager} that manages all the routes.
+   * @param i18nProvider the provider to get the i18n object.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(ROUTES_DEPENDENCY_TYPES.RouteManager)
     private readonly routeManager: RouteManager,
+    @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
   ) {
     //this.logger = loggerFactory.getLogger(this.constructor.name);
     this.logger = loggerFactory(this.constructor.name);
     this.expressApp = express();
+    this.i18n = i18nProvider.i18n();
     this.port = 3000;
     this.expressApp.set('', this);
     this.expressApp.use(express.static('public'));
@@ -71,7 +79,8 @@ export class VttServerImpl implements VTTServer {
     this.addRoutes();
 
     this.server.listen(this.port, () => {
-      this.logger.info(`Server is running on port ${this.port}`);
+      this.logger.info(this.i18n.t('server.started', { port: this.port }));
+      //`Server is running on port ${this.port}`);
     });
   };
 
@@ -79,8 +88,8 @@ export class VttServerImpl implements VTTServer {
    * Performs any clean up on exit.
    */
   private exit = async () => {
-    this.logger.info('Exiting...');
     if (this.server) {
+      this.logger.info(this.i18n.t('server.exiting'));
       await this.server.close();
       this.server = undefined;
     }

@@ -7,6 +7,7 @@ import { dependencyContainer } from '../../utils/dependency-injection';
 import { CAMPAIGN_DEPENDENCY_TYPES } from './dependency-types';
 import { Campaign } from './campaign';
 import { CampaignImpl } from './campaign-impl';
+import { registerStarterCampaignFactory } from './starter-campaign-factory';
 
 /* Only bind campaign if it is not already bound. */
 if (!dependencyContainer.isBound(CAMPAIGN_DEPENDENCY_TYPES.Campaign)) {
@@ -14,6 +15,8 @@ if (!dependencyContainer.isBound(CAMPAIGN_DEPENDENCY_TYPES.Campaign)) {
     .bind<Campaign>(CAMPAIGN_DEPENDENCY_TYPES.Campaign)
     .to(CampaignImpl)
     .inSingletonScope();
+
+  registerStarterCampaignFactory();
 }
 
 export type { Campaign };

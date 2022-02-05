@@ -5,11 +5,7 @@
 
 import { Campaign } from './campaign';
 import { inject, injectable } from 'inversify';
-import {
-  Logger,
-  LoggerFactory,
-  LOGGING_DEPENDENCY_TYPES,
-} from '../../utils/logging';
+import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 
 export const CURRENT_CAMPAIGN_FORMAT_VERSION = '0.0.1';
 
@@ -20,12 +16,11 @@ export class CampaignImpl implements Campaign {
   private formatVersion: string;
 
   constructor(
-    name: string,
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
   ) {
     this.logger = loggerFactory(this.constructor.name);
-    this.name = name;
+    this.name = '';
     this.formatVersion = CURRENT_CAMPAIGN_FORMAT_VERSION;
   }
 
