@@ -17,6 +17,9 @@ import { interfaces } from 'inversify';
 import { GameMap, GAME_MAP_DEPENDENCY_TYPES } from '.';
 import { dependencyContainer } from '../../utils/dependency-injection';
 
+/**
+ * Function to register the starter map factory with dependency injection.
+ */
 export const registerStartMapFactory = (): void => {
   dependencyContainer
     .bind<interfaces.Factory<GameMap>>(

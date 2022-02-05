@@ -20,6 +20,11 @@ import { Campaign } from '../campaign';
  */
 export interface Game {
   /**
+   * The version of the VTT
+   */
+  version: string;
+
+  /**
    * Returns the current {@Campaign} of the game.
    */
   getCampaign(): Campaign;

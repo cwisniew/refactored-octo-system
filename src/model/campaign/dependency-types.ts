@@ -17,6 +17,8 @@
  * Dependency injection types for campaigns
  */
 export const CAMPAIGN_DEPENDENCY_TYPES = {
+  /** Campaign model. */
   Campaign: Symbol.for('Campaign'),
+  /** Factory to create starter campaign. */
   StarterCampaignFactory: Symbol.for('StarterCampaignFactory'),
 };

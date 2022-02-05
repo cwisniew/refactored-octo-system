@@ -30,9 +30,8 @@ export const CURRENT_CAMPAIGN_FORMAT_VERSION = '0.0.1';
 export class CampaignImpl implements Campaign {
   /**
    * The id of the campaign.
-   * @private
    */
-  private readonly id: string;
+  readonly id: string;
 
   /**
    * Logger used for logging messages.
@@ -79,13 +78,6 @@ export class CampaignImpl implements Campaign {
     this.name = '';
     this.formatVersion = CURRENT_CAMPAIGN_FORMAT_VERSION;
     this.logger.debug(this.i18n.t('campaign.debug.created', { id: this.id }));
-  }
-
-  /**
-   * Returns the id of the campaign.
-   */
-  getId(): string {
-    return this.id;
   }
 
   /**

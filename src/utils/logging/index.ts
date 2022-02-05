@@ -19,6 +19,9 @@ import { Logger } from './logger';
 import { default as winston } from 'winston';
 import { interfaces } from 'inversify';
 
+/**
+ * Map of existing logging objects.
+ */
 const loggerMap = new Map<string, Logger>();
 
 /* Only Bind logging classes if not already bound. */

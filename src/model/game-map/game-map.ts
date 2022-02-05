@@ -18,9 +18,9 @@
  */
 export interface GameMap {
   /**
-   * Returns the id of the map.
+   * The id of the map.
    */
-  getId(): string;
+  id: string;
 
   /**
    * Returns the name of the map.

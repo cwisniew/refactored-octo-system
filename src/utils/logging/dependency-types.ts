@@ -13,6 +13,9 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+/**
+ * Types for logging dependency injection.
+ */
 export const LOGGING_DEPENDENCY_TYPES = {
   /** Factory function for creating {@logger}s. */
   LoggerFactory: Symbol.for('Factory<Logger>'),
