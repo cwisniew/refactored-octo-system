@@ -15,7 +15,7 @@
 
 import { dependencyContainer } from './utils/dependency-injection';
 import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
-import './server/routes/init-routes';
+import './server/controllers/init-routes';
 
 const vttServer = dependencyContainer.get<VTTServer>(
   SERVER_DEPENDENCY_TYPES.VTTServer,

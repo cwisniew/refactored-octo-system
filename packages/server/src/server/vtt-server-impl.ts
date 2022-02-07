@@ -18,7 +18,7 @@ import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
-import { ControllerManager, CONTROLLER_DEPENDENCY_TYPES } from './routes';
+import { ControllerManager, CONTROLLER_DEPENDENCY_TYPES } from './controllers';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { i18n } from 'i18next';
 import { Server } from 'socket.io';

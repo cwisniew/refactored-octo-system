@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Controller } from '../../server/routes/controller';
+import { Controller } from '../../server/controllers/controller';
 import { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
