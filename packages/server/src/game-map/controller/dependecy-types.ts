@@ -14,11 +14,11 @@
  */
 
 /**
- * Dependency types for the game map route handler
+ * Dependency types for the game map controller.
  */
-export const GAME_MAP_ROUTE_DEPENDENCY_TYPES = {
+export const GAME_MAP_CONTROLLER_DEPENDENCY_TYPES = {
   /**
-   * Game Map Route Handler
+   * Game Map Controller.
    */
-  GameMapRouteHandler: Symbol.for('GameMapRouteHandler'),
+  GameMapController: Symbol.for('GameMapController'),
 };

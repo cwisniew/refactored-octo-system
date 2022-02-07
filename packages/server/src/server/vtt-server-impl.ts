@@ -18,7 +18,7 @@ import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { default as express, Express } from 'express';
 import * as http from 'http';
-import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
+import { ControllerManager, CONTROLLER_DEPENDENCY_TYPES } from './routes';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { i18n } from 'i18next';
 import { Server } from 'socket.io';
@@ -69,14 +69,14 @@ export class VttServerImpl implements VTTServer {
   /**
    * Creates a new instance of the VttServerImpl class.
    * @param loggerFactory The factory function to create {@link Logger}s/
-   * @param routeManager the {@link RouteManager} that manages all the routes.
+   * @param routeManager the {@link ControllerManager} that manages all the routes.
    * @param i18nProvider the provider to get the i18n object.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
-    @inject(ROUTES_DEPENDENCY_TYPES.RouteManager)
-    private readonly routeManager: RouteManager,
+    @inject(CONTROLLER_DEPENDENCY_TYPES.ControllerManager)
+    private readonly routeManager: ControllerManager,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
   ) {
     //this.logger = loggerFactory.getLogger(this.constructor.name);

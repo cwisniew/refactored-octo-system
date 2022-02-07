@@ -20,5 +20,5 @@ export { GAME_MAP_DEPENDENCY_TYPES } from './model';
 export { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './view';
 export type { GameMapView } from './view';
 
-export { GAME_MAP_ROUTE_DEPENDENCY_TYPES } from './controller';
-export { GameMapRouteHandler } from './controller';
+export { GAME_MAP_CONTROLLER_DEPENDENCY_TYPES } from './controller';
+export { GameMapController } from './controller';

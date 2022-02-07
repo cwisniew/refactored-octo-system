@@ -13,5 +13,5 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export { CAMPAIGN_ROUTE_DEPENDENCY_TYPES } from './dependency-types';
-export { CampaignRouteHandler } from './campaign-route-handler';
+export { CAMPAIGN_CONTROLLER_DEPENDENCY_TYPES } from './dependency-types';
+export { CampaignController } from './campaign-controller';

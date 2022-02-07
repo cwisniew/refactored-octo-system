@@ -15,26 +15,26 @@
 
 import { registerNewRoute } from './register-new-route';
 import {
-  CampaignRouteHandler,
-  CAMPAIGN_ROUTE_DEPENDENCY_TYPES,
+  CampaignController,
+  CAMPAIGN_CONTROLLER_DEPENDENCY_TYPES,
 } from '../../campaign';
 import {
-  GameMapRouteHandler,
-  GAME_MAP_ROUTE_DEPENDENCY_TYPES,
+  GameMapController,
+  GAME_MAP_CONTROLLER_DEPENDENCY_TYPES,
 } from '../../game-map';
 
 /**
  * Register the route for campaigns.
  */
 registerNewRoute(
-  CAMPAIGN_ROUTE_DEPENDENCY_TYPES.CampaignRouteHandler,
-  CampaignRouteHandler,
+  CAMPAIGN_CONTROLLER_DEPENDENCY_TYPES.CampaignController,
+  CampaignController,
 );
 
 /**
  * Register the route for game maps
  */
 registerNewRoute(
-  GAME_MAP_ROUTE_DEPENDENCY_TYPES.GameMapRouteHandler,
-  GameMapRouteHandler,
+  GAME_MAP_CONTROLLER_DEPENDENCY_TYPES.GameMapController,
+  GameMapController,
 );

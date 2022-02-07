@@ -13,5 +13,5 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export { GAME_MAP_ROUTE_DEPENDENCY_TYPES } from './dependecy-types';
-export { GameMapRouteHandler } from './game-map-route-handler';
+export { GAME_MAP_CONTROLLER_DEPENDENCY_TYPES } from './dependecy-types';
+export { GameMapController } from './game-map-controller';

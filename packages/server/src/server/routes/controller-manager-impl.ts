@@ -13,22 +13,22 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from './route-handler';
+import { Controller } from './controller';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
-import { RouteManager } from './route-manager';
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
+import { ControllerManager } from './controller-manager';
 
 /**
- * Class that manages the {@link RouteHandler}s. for a server.
+ * Class that manages the {@link Controller}s. for a server.
  */
 @injectable()
-export class RouteManagerImpl implements RouteManager {
+export class ControllerManagerImpl implements ControllerManager {
   private readonly logger: Logger;
-  private readonly routeHandlers: RouteHandler[] = [];
+  private readonly routeHandlers: Controller[] = [];
 
   /**
-   * Creates a new route manager implementation.
+   * Creates a new controller manager implementation.
    * @param loggerFactory the logger factory to create logging objects.
    */
   constructor(
@@ -39,7 +39,7 @@ export class RouteManagerImpl implements RouteManager {
   }
 
   /**
-   * Adds the routes in the {@link RouteHandler}s to the express app.
+   * Adds the routes in the {@link Controller}s to the express app.
    * @param express the express app to add the routes to.
    */
   addRoutes = (express: Express): void => {
@@ -49,18 +49,18 @@ export class RouteManagerImpl implements RouteManager {
   };
 
   /**
-   * Registers a {@link RouteHandler} to be managed by this class.
-   * @param routes
+   * Registers a {@link Controller} to be managed by this class.
+   * @param controller the controller to handle.
    */
-  registerRouteHandler = (routes: RouteHandler): void => {
-    this.routeHandlers.push(routes);
+  registerController = (controller: Controller): void => {
+    this.routeHandlers.push(controller);
   };
 
   /**
    * Registers multiple route handlers to the route manager.
-   * @param routes the route handlers to register.
+   * @param controllers the route handlers to register.
    */
-  registerRouteHandlers(routes: RouteHandler[]): void {
-    routes.forEach((r) => this.registerRouteHandler(r));
+  registerControllers(controllers: Controller[]): void {
+    controllers.forEach((r) => this.registerController(r));
   }
 }

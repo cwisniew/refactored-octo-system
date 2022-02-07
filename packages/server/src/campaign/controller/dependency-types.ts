@@ -13,6 +13,6 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export const CAMPAIGN_ROUTE_DEPENDENCY_TYPES = {
-  CampaignRouteHandler: Symbol.for('CampaignRouteHandler'),
+export const CAMPAIGN_CONTROLLER_DEPENDENCY_TYPES = {
+  CampaignController: Symbol.for('CampaignController'),
 };

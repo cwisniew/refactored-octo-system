@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from '../../server/routes/route-handler';
+import { Controller } from '../../server/routes/controller';
 import { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
@@ -23,17 +23,17 @@ import { CampaignView, CAMPAIGN_VIEW_DEPENDENCY_TYPES } from '../view';
 import { Game, GAME_DEPENDENCY_TYPES } from '../../game';
 
 /**
- * The route handler for the model route.
+ * The route handler for the campaign controller.
  */
 @injectable()
-export class CampaignRouteHandler implements RouteHandler {
+export class CampaignController implements Controller {
   /** Object used to log messages. */
   private readonly logger: Logger;
 
   /** Object for translation. */
   private readonly i18n: i18n;
   /**
-   * Create a new CampaignRouteHandler.
+   * Create a new CampaignController.
    * @param loggerFactory the factory used to create logging objects.
    * @param i18nProvider provider for the translation object.
    * @param campaignView the view for the model.

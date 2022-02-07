@@ -13,15 +13,28 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
+import { Controller } from './controller';
 import { Express } from 'express';
 
 /**
- * Interface for classes that handle server routes.
+ * Interface implemented by classes that manage controllers.
  */
-export interface RouteHandler {
+export interface ControllerManager {
   /**
-   * Add routes for this handler to the express server.
-   * @param expressApp the express server to add routes to.
+   * Adds the routes to the express application/
+   * @param express the express application to add the routes to.
    */
-  addRoutes(expressApp: Express): void;
+  addRoutes(express: Express): void;
+
+  /**
+   * Registers a route handler to the route manager.
+   * @param controller the controller to register.
+   */
+  registerController(controller: Controller): void;
+
+  /**
+   * Registers multiple route handlers to the route manager.
+   * @param controllers the controllers to register.
+   */
+  registerControllers(controllers: Controller[]): void;
 }

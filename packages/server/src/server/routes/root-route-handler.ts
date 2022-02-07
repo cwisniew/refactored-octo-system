@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from './route-handler';
+import { Controller } from './controller';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
@@ -24,7 +24,7 @@ import { i18n } from 'i18next';
  * The handler for the root route.
  */
 @injectable()
-export class RootRouteHandler implements RouteHandler {
+export class RootRouteHandler implements Controller {
   /** Object used to log messages. */
   private readonly logger: Logger;
 

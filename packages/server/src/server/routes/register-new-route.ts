@@ -13,29 +13,27 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from './route-handler';
+import { Controller } from './controller';
 import { dependencyContainer } from '../../utils/dependency-injection';
-import { RouteManager } from './route-manager';
-import { ROUTES_DEPENDENCY_TYPES } from './dependency-types';
+import { ControllerManager } from './controller-manager';
+import { CONTROLLER_DEPENDENCY_TYPES } from './dependency-types';
 
 export const registerNewRoute = (
-  routeHandlerSymbol: symbol,
-  bindToInSingleton: new (...args: never[]) => RouteHandler,
+  controllerSymbol: symbol,
+  bindToInSingleton: new (...args: never[]) => Controller,
 ): void => {
-  console.log('here 1');
-  if (!dependencyContainer.isBound(routeHandlerSymbol)) {
-    console.log('here 2');
+  if (!dependencyContainer.isBound(controllerSymbol)) {
     dependencyContainer
-      .bind<RouteHandler>(routeHandlerSymbol)
+      .bind<Controller>(controllerSymbol)
       .to(bindToInSingleton)
       .inSingletonScope();
 
-    const routeManager = dependencyContainer.get<RouteManager>(
-      ROUTES_DEPENDENCY_TYPES.RouteManager,
+    const controllerManager = dependencyContainer.get<ControllerManager>(
+      CONTROLLER_DEPENDENCY_TYPES.ControllerManager,
     );
 
-    routeManager.registerRouteHandler(
-      dependencyContainer.get<RouteHandler>(routeHandlerSymbol),
+    controllerManager.registerController(
+      dependencyContainer.get<Controller>(controllerSymbol),
     );
   }
 };

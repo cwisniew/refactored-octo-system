@@ -14,16 +14,14 @@
  */
 
 import { dependencyContainer } from '../../utils/dependency-injection';
-import { ROUTES_DEPENDENCY_TYPES } from './dependency-types';
-import { RouteHandler } from './route-handler';
+import { Controller } from './controller';
 import { RootRouteHandler } from './root-route-handler';
-import { RouteManager } from './route-manager';
-import { RouteManagerImpl } from './route-manager-impl';
-import { CampaignRouteHandler } from '../../campaign/controller/campaign-route-handler';
-import { GameMapRouteHandler } from '../../game-map/controller/game-map-route-handler';
+import { ControllerManager } from './controller-manager';
+import { CONTROLLER_DEPENDENCY_TYPES } from './dependency-types';
+import { ControllerManagerImpl } from './controller-manager-impl';
 
 /**
- * Create the binding for {@link RouteManager} and any {@link RouteHandler} objects.
+ * Create the binding for {@link RouteManager} and any {@link Controller} objects.
  * The `.onActivation()` method for the {@link RouteManager} binding should be
  * used to create any RouteHandler objects and register them.
  * @example
@@ -43,29 +41,31 @@ import { GameMapRouteHandler } from '../../game-map/controller/game-map-route-ha
  */
 
 /* Only register if it has not already been registered. */
-if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
+if (
+  !dependencyContainer.isBound(CONTROLLER_DEPENDENCY_TYPES.ControllerManager)
+) {
   dependencyContainer
-    .bind<RouteHandler>(ROUTES_DEPENDENCY_TYPES.RootRouteHandler)
+    .bind<Controller>(CONTROLLER_DEPENDENCY_TYPES.RootRouteHandler)
     .to(RootRouteHandler)
     .inSingletonScope();
 
   dependencyContainer
-    .bind<RouteManager>(ROUTES_DEPENDENCY_TYPES.RouteManager)
-    .to(RouteManagerImpl)
+    .bind<ControllerManager>(CONTROLLER_DEPENDENCY_TYPES.ControllerManager)
+    .to(ControllerManagerImpl)
     .inSingletonScope()
-    .onActivation((context, routeManager): RouteManager => {
-      const routeHandlers: RouteHandler[] = [];
+    .onActivation((context, routeManager): ControllerManager => {
+      const controllers: Controller[] = [];
 
-      routeHandlers.push(
-        context.container.get<RouteHandler>(
-          ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
+      controllers.push(
+        context.container.get<Controller>(
+          CONTROLLER_DEPENDENCY_TYPES.RootRouteHandler,
         ),
       );
 
-      routeManager.registerRouteHandlers(routeHandlers);
+      routeManager.registerControllers(controllers);
       return routeManager;
     });
 }
 
-export type { RouteManager };
-export { ROUTES_DEPENDENCY_TYPES };
+export type { ControllerManager };
+export { CONTROLLER_DEPENDENCY_TYPES };

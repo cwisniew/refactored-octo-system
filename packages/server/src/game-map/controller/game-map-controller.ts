@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { RouteHandler } from '../../server/routes/route-handler';
+import { Controller } from '../../server/routes/controller';
 import { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
@@ -25,14 +25,14 @@ import { GameMapView, GAME_MAP_VIEW_DEPENDENCY_TYPES } from '../view';
  * The route handler for Game Maps.
  */
 @injectable()
-export class GameMapRouteHandler implements RouteHandler {
+export class GameMapController implements Controller {
   /** Object used to log messages. */
   private readonly logger: Logger;
 
   /** Object for translation. */
   private readonly i18n: i18n;
   /**
-   * Create a new GameMapRouteHandler.
+   * Create a new GameMapController.
    * @param loggerFactory the factory used to create logging objects.
    * @param i18nProvider provider for the translation object.
    * @param gameMapView the view for game maps
