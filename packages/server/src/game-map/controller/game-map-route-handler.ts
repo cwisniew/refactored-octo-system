@@ -53,8 +53,10 @@ export class GameMapRouteHandler implements RouteHandler {
    * @param expressApp the express app to add the routes to.
    */
   addRoutes(expressApp: Express): void {
-    this.logger.debug(this.i18n.t('server.debug.route.add', { path: '/map' }));
-    expressApp.get('/map/:id', (req, res) => {
+    this.logger.debug(
+      this.i18n.t('server.debug.route.add', { path: '/game-map' }),
+    );
+    expressApp.get('/game-map/:id', (req, res) => {
       const id = req.params.id;
       try {
         res.send(this.gameMapView.getGameMapData(id));
@@ -69,7 +71,7 @@ export class GameMapRouteHandler implements RouteHandler {
       }
     });
 
-    expressApp.get('/map', (req, res) => {
+    expressApp.get('/game-map', (req, res) => {
       res.send(this.gameMapView.getGameMapList());
     });
   }

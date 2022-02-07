@@ -1,6 +1,7 @@
 {
   "server": {
     "started": "Server started on port {{port}}",
+    "wsStarted":  "Started Web Socket listener on port {{port}}",
     "exiting": "Server exiting...",
     "debug": {
       "route": {

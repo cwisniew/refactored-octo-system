@@ -13,14 +13,28 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { dependencyContainer } from './utils/dependency-injection';
-import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
-import './server/routes/init-routes';
+import { registerNewRoute } from './register-new-route';
+import {
+  CampaignRouteHandler,
+  CAMPAIGN_ROUTE_DEPENDENCY_TYPES,
+} from '../../campaign';
+import {
+  GameMapRouteHandler,
+  GAME_MAP_ROUTE_DEPENDENCY_TYPES,
+} from '../../game-map';
 
-const vttServer = dependencyContainer.get<VTTServer>(
-  SERVER_DEPENDENCY_TYPES.VTTServer,
+/**
+ * Register the route for campaigns.
+ */
+registerNewRoute(
+  CAMPAIGN_ROUTE_DEPENDENCY_TYPES.CampaignRouteHandler,
+  CampaignRouteHandler,
 );
 
-(async () => {
-  await vttServer.start();
-})();
+/**
+ * Register the route for game maps
+ */
+registerNewRoute(
+  GAME_MAP_ROUTE_DEPENDENCY_TYPES.GameMapRouteHandler,
+  GameMapRouteHandler,
+);

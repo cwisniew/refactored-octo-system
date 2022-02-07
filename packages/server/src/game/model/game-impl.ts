@@ -61,7 +61,7 @@ export class GameImpl implements Game {
   ) {
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
-    this.campaign = campaignFactory(this.i18n.t('model.starter.name'));
+    this.campaign = campaignFactory(this.i18n.t('campaign.starter.name'));
   }
 
   /**

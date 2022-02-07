@@ -18,3 +18,6 @@ export { CAMPAIGN_DEPENDENCY_TYPES } from './model';
 
 export { CAMPAIGN_VIEW_DEPENDENCY_TYPES } from './view';
 export type { CampaignView } from './view';
+
+export { CAMPAIGN_ROUTE_DEPENDENCY_TYPES } from './controller';
+export { CampaignRouteHandler } from './controller';

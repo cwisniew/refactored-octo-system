@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "npm run -w packages/server start:nodemon",
+    "start": "concurrently \"npm run -w packages/server start:nodemon\"  \"npm run -w packages/ui start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +17,26 @@
   },
   "homepage": "https://github.com/cwisniew/refactored-octo-system#readme",
   "workspaces": [
-    "packages/server"
-  ]
+    "packages/server",
+    "packages/ui"
+  ],
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13",
+    "winston": "^3.5.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-license-header": "^0.4.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-unicorn": "^40.1.0",
+    "prettier": "^2.5.1",
+    "typedoc": "^0.22.11"
+  }
 }

@@ -50,16 +50,6 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
     .inSingletonScope();
 
   dependencyContainer
-    .bind<RouteHandler>(ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler)
-    .to(CampaignRouteHandler)
-    .inSingletonScope();
-
-  dependencyContainer
-    .bind<RouteHandler>(ROUTES_DEPENDENCY_TYPES.GameMapRouteHandler)
-    .to(GameMapRouteHandler)
-    .inSingletonScope();
-
-  dependencyContainer
     .bind<RouteManager>(ROUTES_DEPENDENCY_TYPES.RouteManager)
     .to(RouteManagerImpl)
     .inSingletonScope()
@@ -69,18 +59,6 @@ if (!dependencyContainer.isBound(ROUTES_DEPENDENCY_TYPES.RouteManager)) {
       routeHandlers.push(
         context.container.get<RouteHandler>(
           ROUTES_DEPENDENCY_TYPES.RootRouteHandler,
-        ),
-      );
-
-      routeHandlers.push(
-        context.container.get<RouteHandler>(
-          ROUTES_DEPENDENCY_TYPES.CampaignRouteHandler,
-        ),
-      );
-
-      routeHandlers.push(
-        context.container.get<GameMapRouteHandler>(
-          ROUTES_DEPENDENCY_TYPES.GameMapRouteHandler,
         ),
       );
 

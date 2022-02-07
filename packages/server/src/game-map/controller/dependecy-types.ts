@@ -13,14 +13,12 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { dependencyContainer } from './utils/dependency-injection';
-import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
-import './server/routes/init-routes';
-
-const vttServer = dependencyContainer.get<VTTServer>(
-  SERVER_DEPENDENCY_TYPES.VTTServer,
-);
-
-(async () => {
-  await vttServer.start();
-})();
+/**
+ * Dependency types for the game map route handler
+ */
+export const GAME_MAP_ROUTE_DEPENDENCY_TYPES = {
+  /**
+   * Game Map Route Handler
+   */
+  GameMapRouteHandler: Symbol.for('GameMapRouteHandler'),
+};

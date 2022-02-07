@@ -58,9 +58,9 @@ export class CampaignRouteHandler implements RouteHandler {
    */
   addRoutes(expressApp: Express): void {
     this.logger.debug(
-      this.i18n.t('server.debug.route.add', { path: '/model' }),
+      this.i18n.t('server.debug.route.add', { path: '/campaign' }),
     );
-    expressApp.get('/model', (req, res) => {
+    expressApp.get('/campaign', (req, res) => {
       res.send(this.campaignView.getCampaignData(this.game.getCampaign()));
     });
   }

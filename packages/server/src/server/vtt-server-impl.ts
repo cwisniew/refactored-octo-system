@@ -21,6 +21,9 @@ import * as http from 'http';
 import { RouteManager, ROUTES_DEPENDENCY_TYPES } from './routes';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { i18n } from 'i18next';
+import { Server } from 'socket.io';
+import { default as bodyParser } from 'body-parser';
+import cors from 'cors';
 
 /**
  * Class that implements the server
@@ -58,6 +61,12 @@ export class VttServerImpl implements VTTServer {
   private server?: http.Server;
 
   /**
+   * The web socket server connection
+   * @private
+   */
+  private socketIoServer?: Server;
+
+  /**
    * Creates a new instance of the VttServerImpl class.
    * @param loggerFactory The factory function to create {@link Logger}s/
    * @param routeManager the {@link RouteManager} that manages all the routes.
@@ -89,7 +98,15 @@ export class VttServerImpl implements VTTServer {
 
     this.server = http.createServer(this.expressApp);
 
+    this.logger.info(this.i18n.t('server.wsStarted', { port: this.port }));
+    this.socketIoServer = new Server(this.server, {
+      cors: { origin: 'http://localhost:3001' },
+    });
+
+    this.addMiddleware();
     this.addRoutes();
+
+    // TODO: CDW add on connection callback for socket io here
 
     this.server.listen(this.port, () => {
       this.logger.info(this.i18n.t('server.started', { port: this.port }));
@@ -113,5 +130,15 @@ export class VttServerImpl implements VTTServer {
    */
   private addRoutes = () => {
     this.routeManager.addRoutes(this.expressApp);
+  };
+
+  /**
+   * Adds middleware components to the express server.
+   * @private
+   */
+  private addMiddleware = () => {
+    this.expressApp.use(cors());
+    this.expressApp.use(bodyParser.json());
+    this.expressApp.use(bodyParser.urlencoded({ extended: true }));
   };
 }

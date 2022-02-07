@@ -13,14 +13,5 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { dependencyContainer } from './utils/dependency-injection';
-import { SERVER_DEPENDENCY_TYPES, VTTServer } from './server';
-import './server/routes/init-routes';
-
-const vttServer = dependencyContainer.get<VTTServer>(
-  SERVER_DEPENDENCY_TYPES.VTTServer,
-);
-
-(async () => {
-  await vttServer.start();
-})();
+export { CAMPAIGN_ROUTE_DEPENDENCY_TYPES } from './dependency-types';
+export { CampaignRouteHandler } from './campaign-route-handler';
