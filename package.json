@@ -1,22 +1,32 @@
 {
-  "name": "vtt2-backend",
+  "name": "vtt2",
   "version": "1.0.0",
-  "description": "Backend for VTT POC",
-  "main": "index.js",
+  "description": "",
   "scripts": {
-    "start": "ts-node ./src/app.ts",
-    "start:prod": "npm run build && node ./dist/app.js",
-    "start:nodemon": "nodemon",
-    "build": "npx tsc",
+    "start": "concurrently \"npm run -w packages/server start:nodemon\"  \"npm run -w packages/ui start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Craig Wisniewski",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwisniew/refactored-octo-system.git"
+  },
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cwisniew/refactored-octo-system/issues"
+  },
+  "homepage": "https://github.com/cwisniew/refactored-octo-system#readme",
+  "workspaces": [
+    "packages/server",
+    "packages/ui"
+  ],
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "inversify": "^6.0.1",
+    "reflect-metadata": "^0.1.13",
+    "winston": "^3.5.1"
+  },
   "devDependencies": {
-    "@types/express": "^4.17.13",
-    "@types/i18next-fs-backend": "^1.1.2",
-    "@types/node": "^17.0.14",
-    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "eslint": "^8.8.0",
     "eslint-config-prettier": "^8.3.0",
@@ -26,20 +36,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-unicorn": "^40.1.0",
-    "nodemon": "^2.0.15",
     "prettier": "^2.5.1",
-    "ts-node": "^10.4.0",
-    "typedoc": "^0.22.11",
-    "typescript": "^4.5.5"
-  },
-  "dependencies": {
-    "express": "^4.17.2",
-    "i18next": "^21.6.10",
-    "i18next-express-middleware": "^2.0.0",
-    "i18next-fs-backend": "^1.1.4",
-    "inversify": "^6.0.1",
-    "reflect-metadata": "^0.1.13",
-    "uuid": "^8.3.2",
-    "winston": "^3.5.1"
+    "typedoc": "^0.22.11"
   }
 }
