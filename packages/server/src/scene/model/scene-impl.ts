@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GameMap } from './game-map';
+import { Scene } from './scene';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { inject, injectable } from 'inversify';
 import { ID_GEN_DEPENDENCY_TYPES, IdGen } from '../../utils/id';
@@ -24,9 +24,9 @@ import { i18n } from 'i18next';
  * Class that represents a game map.
  */
 @injectable()
-export class GameMapImpl implements GameMap {
+export class SceneImpl implements Scene {
   /**
-   * The id of the game map.
+   * The id of the scene.
    */
   readonly id: string;
 
@@ -43,13 +43,13 @@ export class GameMapImpl implements GameMap {
   private readonly i18n: i18n;
 
   /**
-   * The name of the game map.
+   * The name of the scene.
    * @private
    */
   private name: string;
 
   /**
-   * Creates a new game map.
+   * Creates a new scene.
    * @param loggerFactory the factory for creating logging objects.
    * @param idGen class used to generate ids.
    * @param i18nProvider the provider to get translation objects.
@@ -64,19 +64,19 @@ export class GameMapImpl implements GameMap {
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
     this.name = '';
-    this.logger.debug(this.i18n.t('gamemap.debug.created', { id: this.id }));
+    this.logger.debug(this.i18n.t('scene.debug.created', { id: this.id }));
   }
 
   /**
-   * Returns the name of the map.
+   * Returns the name of the scene.
    */
   getName(): string {
     return this.name;
   }
 
   /**
-   * Sets the name of the game map.
-   * @param name the name of the game map.
+   * Sets the name of the scene.
+   * @param name the name of the scene.
    */
   setName(name: string): void {
     this.name = name;

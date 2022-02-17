@@ -14,22 +14,22 @@
  */
 
 /**
- * Interface for game maps.
+ * Interface for scenes.
  */
-export interface GameMap {
+export interface Scene {
   /**
-   * The id of the map.
+   * The id of the scene.
    */
   id: string;
 
   /**
-   * Returns the name of the map.
+   * Returns the name of the scene.
    */
   getName(): string;
 
   /**
-   * Sets the name of the game map.
-   * @param name the name of the game map.
+   * Sets the name of the scene.
+   * @param name the name of the scene.
    */
   setName(name: string): void;
 }

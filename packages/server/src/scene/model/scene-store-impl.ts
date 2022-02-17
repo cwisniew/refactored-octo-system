@@ -13,19 +13,19 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GameMap } from './game-map';
-import { GameMapStore } from './game-map-store';
+import { Scene } from './scene';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { i18n } from 'i18next';
 import { inject, injectable } from 'inversify';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
+import { SceneStore } from './scene-store';
 
 /**
- * Storage for {@link GameMap}s.
+ * Storage for {@link Scene}s.
  * Eventually this will be something more involved than it is currenty.
  */
 @injectable()
-export class GameMapStoreImpl implements GameMapStore {
+export class SceneStoreImpl implements SceneStore {
   /**
    * Logger used for logging messages.
    * @private
@@ -39,7 +39,7 @@ export class GameMapStoreImpl implements GameMapStore {
   private readonly i18n: i18n;
 
   /** The storage for game maps. */
-  private readonly store = new Map<string, GameMap>();
+  private readonly store = new Map<string, Scene>();
 
   /**
    * Creates a new model.
@@ -58,47 +58,47 @@ export class GameMapStoreImpl implements GameMapStore {
   /**
    * Returns ids of the game maps.
    */
-  getMapIds(): string[] {
+  getSceneIds(): string[] {
     return Array.from(this.store.keys());
   }
 
   /**
-   * Adds a game map to the store.
-   * @param gameMap the {@link GameMap} to add to the model.
+   * Adds a scene to the store.
+   * @param scene the {@link Scene} to add to the model.
    */
-  addGameMap(gameMap: GameMap): void {
-    this.store.set(gameMap.id, gameMap);
+  addScene(scene: Scene): void {
+    this.store.set(scene.id, scene);
   }
 
   /**
-   * Removes a game map from the store.
-   * @param gameMap either a string which is treated as the id of the {@link GameMap}
-   * or the actual {@link GameMap} to remove.
+   * Removes a scene from the store.
+   * @param scene either a string which is treated as the id of the {@link Scene}
+   * or the actual {@link Scene} to remove.
    */
-  removeGameMap(gameMap: string | GameMap): void {
+  removeScene(scene: string | Scene): void {
     let key = '';
-    if (typeof gameMap === 'string') {
-      key = gameMap;
+    if (typeof scene === 'string') {
+      key = scene;
     } else {
-      key = gameMap.id;
+      key = scene.id;
     }
     this.store.delete(key);
   }
 
   /**
-   * Returns the {@link GameMap} from the store, or undefined if it is not
+   * Returns the {@link Scene} from the store, or undefined if it is not
    * in the store.
-   * @param id the id of the {@link GameMap} to retrieve.
+   * @param id the id of the {@link Scene} to retrieve.
    */
-  getGameMap(id: string): GameMap | undefined {
+  getScene(id: string): Scene | undefined {
     return this.store.get(id);
   }
 
   /**
-   * Returns if the store contains the specified {@link GameMap}.
-   * @param id the id of the {@link GameMap} to check.
+   * Returns if the store contains the specified {@link Scene}.
+   * @param id the id of the {@link Scene} to check.
    */
-  hasGameMap(id: string): boolean {
+  hasScene(id: string): boolean {
     return this.store.has(id);
   }
 
@@ -112,7 +112,7 @@ export class GameMapStoreImpl implements GameMapStore {
   /**
    * Returns the game maps in the game store.
    */
-  getGameMapList(): GameMap[] {
+  getSceneList(): Scene[] {
     return Array.from(this.store.values());
   }
 }

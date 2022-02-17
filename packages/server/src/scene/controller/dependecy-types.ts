@@ -14,13 +14,11 @@
  */
 
 /**
- * Types for game map dependency injection
+ * Dependency types for the scene controller.
  */
-export const GAME_MAP_DEPENDENCY_TYPES = {
-  /** Game Maps. */
-  GameMap: Symbol.for('GameMap'),
-  /** Factory for creating starter game maps. */
-  StarterGameMapFactory: Symbol.for('Factory<GameMap>'),
-  /** Storage for Game Maps. */
-  GameMapStore: Symbol.for('GameMapStore'),
+export const SCENE_CONTROLLER_DEPENDENCY_TYPES = {
+  /**
+   * Game Map Controller.
+   */
+  SceneController: Symbol.for('SceneController'),
 };

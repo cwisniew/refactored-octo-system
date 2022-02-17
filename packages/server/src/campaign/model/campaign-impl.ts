@@ -17,11 +17,7 @@ import { Campaign } from './campaign';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { IdGen, ID_GEN_DEPENDENCY_TYPES } from '../../utils/id';
-import {
-  GameMap,
-  GameMapStore,
-  GAME_MAP_DEPENDENCY_TYPES,
-} from '../../game-map';
+import { GameMap, GameMapStore, GAME_MAP_DEPENDENCY_TYPES } from '../../scene';
 import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
 import { i18n } from 'i18next';
 

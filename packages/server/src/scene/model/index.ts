@@ -14,28 +14,28 @@
  */
 
 import { dependencyContainer } from '../../utils/dependency-injection';
-import { GAME_MAP_DEPENDENCY_TYPES } from './dependency-types';
-import { GameMap } from './game-map';
-import { GameMapImpl } from './game-map-impl';
-import { GameMapStore } from './game-map-store';
-import { GameMapStoreImpl } from './game-map-store-impl';
-import { registerStartMapFactory } from './starter-game-map-factory';
+import { SCENE_DEPENDENCY_TYPES } from './dependency-types';
+import { Scene } from './scene';
+import { SceneImpl } from './scene-impl';
+import { SceneStore } from './scene-store';
+import { SceneStoreImpl } from './scene-store-impl';
+import { registerStarterSceneFactory } from './starter-game-map-factory';
 
 /* Only bind model if it is not already bound. */
-if (!dependencyContainer.isBound(GAME_MAP_DEPENDENCY_TYPES.GameMap)) {
+if (!dependencyContainer.isBound(SCENE_DEPENDENCY_TYPES.Scene)) {
   dependencyContainer
-    .bind<GameMap>(GAME_MAP_DEPENDENCY_TYPES.GameMap)
-    .to(GameMapImpl)
+    .bind<Scene>(SCENE_DEPENDENCY_TYPES.Scene)
+    .to(SceneImpl)
     .inSingletonScope();
 
   dependencyContainer
-    .bind<GameMapStore>(GAME_MAP_DEPENDENCY_TYPES.GameMapStore)
-    .to(GameMapStoreImpl)
+    .bind<SceneStore>(SCENE_DEPENDENCY_TYPES.SceneStore)
+    .to(SceneStoreImpl)
     .inSingletonScope();
 
-  registerStartMapFactory();
+  registerStarterSceneFactory();
 }
 
-export type { GameMap };
-export type { GameMapStore };
-export { GAME_MAP_DEPENDENCY_TYPES };
+export type { Scene };
+export type { SceneStore };
+export { SCENE_DEPENDENCY_TYPES };

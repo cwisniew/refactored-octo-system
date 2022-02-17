@@ -13,18 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GAME_MAP_DEPENDENCY_TYPES, GameMap, GameMapStore } from '../model';
+import { SCENE_DEPENDENCY_TYPES, GameMap, SceneStore } from '../model';
 import { GameMapData, GameMapListData, GameMapView } from './game-map-view';
 import { inject, injectable } from 'inversify';
 
 /**
- * Class that extract data from a {@link GameMap} object.
+ * Class that extract data from a {@link Scene} object.
  */
 @injectable()
-export class GameMapViewImpl implements GameMapView {
+export class SceneViewImpl implements GameMapView {
   constructor(
-    @inject(GAME_MAP_DEPENDENCY_TYPES.GameMapStore)
-    private readonly gameMapStore: GameMapStore,
+    @inject(SCENE_DEPENDENCY_TYPES.SceneStore)
+    private readonly sceneStore: SceneStore,
   ) {}
 
   /**
@@ -35,7 +35,7 @@ export class GameMapViewImpl implements GameMapView {
   getGameMapData(gameMap: string | GameMap): GameMapData {
     let gm: GameMap | undefined;
     if (typeof gameMap === 'string') {
-      gm = this.gameMapStore.getGameMap(gameMap);
+      gm = this.sceneStore.getScene(gameMap);
       if (!gm) {
         throw `Unknown game map id = ${gameMap}`;
       }
@@ -62,7 +62,7 @@ export class GameMapViewImpl implements GameMapView {
    */
   getGameMapList(): GameMapListData {
     return {
-      gameMaps: this.gameMapStore.getGameMapList().map((m) => {
+      gameMaps: this.sceneStore.getGameMapList().map((m) => {
         return {
           id: m.id,
           name: m.getName(),

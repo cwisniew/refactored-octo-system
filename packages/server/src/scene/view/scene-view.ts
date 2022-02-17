@@ -13,22 +13,22 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GameMap } from '../model';
+import { Scene } from '../model';
 
 /**
- * Information about a game map.
+ * Information about a scene.
  */
-export interface GameMapData {
-  /** The ide of the game map. */
+export interface SceneData {
+  /** The id of the scene. */
   id: string;
-  /** the name of the game map. */
+  /** the name of the scene. */
   name: string;
 }
 
 /**
- * Information about the list of game maps.
+ * Information about the list of scenes.
  */
-export interface GameMapListData {
+export interface SceneListData {
   gameMaps: {
     id: string;
     name: string;
@@ -36,18 +36,18 @@ export interface GameMapListData {
 }
 
 /**
- * Interface of objects that extract data from a {@link GameMap} object.
+ * Interface of objects that extract data from a {@link Scene} object.
  */
-export interface GameMapView {
+export interface SceneView {
   /**
-   * Extract all the data from the game map.
-   * @param gameMap if string the id of a {@link GameMap} or the {@link GameMap}
+   * Extract all the data from the scene.
+   * @param scene if string the id of a {@link Scene} or the {@link Scene}
    * itself.
    */
-  getGameMapData(gameMap: string | GameMap): GameMapData;
+  getSceneData(scene: string | Scene): SceneData;
 
   /**
-   * Extract data from the list game maps.
+   * Extract data from the list scenes.
    */
-  getGameMapList(): GameMapListData;
+  getSceneList(): SceneListData;
 }

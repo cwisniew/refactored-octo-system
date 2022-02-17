@@ -19,13 +19,12 @@ import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
 import { i18n } from 'i18next';
-import { GameMapView, GAME_MAP_VIEW_DEPENDENCY_TYPES } from '../view';
 
 /**
  * The route handler for Game Maps.
  */
 @injectable()
-export class GameMapController implements Controller {
+export class SceneController implements Controller {
   /** Object used to log messages. */
   private readonly logger: Logger;
 
@@ -35,14 +34,14 @@ export class GameMapController implements Controller {
    * Create a new GameMapController.
    * @param loggerFactory the factory used to create logging objects.
    * @param i18nProvider provider for the translation object.
-   * @param gameMapView the view for game maps
+   * @param sceneView the view for scenes
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
-    @inject(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)
-    private readonly gameMapView: GameMapView,
+    @inject(SCENE_VIEW_DEPENDENCY_TYPES.sceneView)
+    private readonly sceneView: sceneView,
   ) {
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
@@ -59,7 +58,7 @@ export class GameMapController implements Controller {
     expressApp.get('/game-map/:id', (req, res) => {
       const id = req.params.id;
       try {
-        res.send(this.gameMapView.getGameMapData(id));
+        res.send(this.sceneView.getGameMapData(id));
       } catch (e) {
         this.logger.warn(
           this.i18n.t('server.request.unknownId', {
@@ -72,7 +71,7 @@ export class GameMapController implements Controller {
     });
 
     expressApp.get('/game-map', (req, res) => {
-      res.send(this.gameMapView.getGameMapList());
+      res.send(this.sceneView.getGameMapList());
     });
   }
 }

@@ -13,25 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { interfaces } from 'inversify';
-import { GameMap, GAME_MAP_DEPENDENCY_TYPES } from './index';
 import { dependencyContainer } from '../../utils/dependency-injection';
+import { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './dependency-types';
+import { SceneView } from './scene-view';
+import { GameMapViewImpl } from './game-map-view-impl';
 
-/**
- * Function to register the starter map factory with dependency injection.
- */
-export const registerStartMapFactory = (): void => {
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)) {
   dependencyContainer
-    .bind<interfaces.Factory<GameMap>>(
-      GAME_MAP_DEPENDENCY_TYPES.StarterGameMapFactory,
-    )
-    .toFactory<GameMap, [name: string]>((context: interfaces.Context) => {
-      return (mapName: string) => {
-        const gamemap = context.container.get<GameMap>(
-          GAME_MAP_DEPENDENCY_TYPES.GameMap,
-        );
-        gamemap.setName(mapName);
-        return gamemap;
-      };
-    });
-};
+    .bind<SceneView>(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)
+    .to(GameMapViewImpl)
+    .inSingletonScope();
+}
+
+export { GAME_MAP_VIEW_DEPENDENCY_TYPES };
+export type { SceneView };

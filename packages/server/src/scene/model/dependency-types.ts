@@ -13,5 +13,14 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export { GAME_MAP_CONTROLLER_DEPENDENCY_TYPES } from './dependecy-types';
-export { GameMapController } from './game-map-controller';
+/**
+ * Types for scene dependency injection
+ */
+export const SCENE_DEPENDENCY_TYPES = {
+  /** Scene Maps. */
+  Scene: Symbol.for('Scene'),
+  /** Factory for creating starter game maps. */
+  StarterSceneFactory: Symbol.for('Factory<Scene>'),
+  /** Storage for Scenes. */
+  SceneStore: Symbol.for('Scene'),
+};

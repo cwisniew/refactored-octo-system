@@ -13,18 +13,5 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { dependencyContainer } from '../../utils/dependency-injection';
-import { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './dependency-types';
-import { GameMapView } from './game-map-view';
-import { GameMapViewImpl } from './game-map-view-impl';
-
-/* Only bind if not already bound. */
-if (!dependencyContainer.isBound(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)) {
-  dependencyContainer
-    .bind<GameMapView>(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)
-    .to(GameMapViewImpl)
-    .inSingletonScope();
-}
-
-export { GAME_MAP_VIEW_DEPENDENCY_TYPES };
-export type { GameMapView };
+export { SCENE_CONTROLLER_DEPENDENCY_TYPES } from './dependecy-types';
+export { SceneController } from './scene-controller';

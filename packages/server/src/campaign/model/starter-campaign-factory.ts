@@ -18,7 +18,7 @@ import { dependencyContainer } from '../../utils/dependency-injection';
 import { interfaces } from 'inversify';
 import { CAMPAIGN_DEPENDENCY_TYPES } from './dependency-types';
 import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
-import { GAME_MAP_DEPENDENCY_TYPES, GameMap } from '../../game-map';
+import { GAME_MAP_DEPENDENCY_TYPES, GameMap } from '../../scene';
 
 /**
  * Factory for creating a "starter" model.

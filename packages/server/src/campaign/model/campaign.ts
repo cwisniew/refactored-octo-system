@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GameMap } from '../../game-map';
+import { GameMap } from '../../scene';
 
 /**
  * Interface used for Campaign objects.

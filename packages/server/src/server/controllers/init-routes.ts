@@ -19,9 +19,9 @@ import {
   CAMPAIGN_CONTROLLER_DEPENDENCY_TYPES,
 } from '../../campaign';
 import {
-  GameMapController,
-  GAME_MAP_CONTROLLER_DEPENDENCY_TYPES,
-} from '../../game-map';
+  SceneController,
+  SCENE_CONTROLLER_DEPENDENCY_TYPES,
+} from '../../scene';
 
 /**
  * Register the route for campaigns.
@@ -35,6 +35,6 @@ registerNewRoute(
  * Register the route for game maps
  */
 registerNewRoute(
-  GAME_MAP_CONTROLLER_DEPENDENCY_TYPES.GameMapController,
-  GameMapController,
+  SCENE_CONTROLLER_DEPENDENCY_TYPES.SceneController,
+  SceneController,
 );
