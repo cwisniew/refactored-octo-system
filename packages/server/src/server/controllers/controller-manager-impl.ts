@@ -18,14 +18,35 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { inject, injectable } from 'inversify';
 import { Express } from 'express';
 import { ControllerManager } from './controller-manager';
+import { Server, Socket } from 'socket.io';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
+import { SocketId } from 'socket.io-adapter';
 
 /**
  * Class that manages the {@link Controller}s. for a server.
  */
 @injectable()
 export class ControllerManagerImpl implements ControllerManager {
+  /**
+   * Logger for logging messages.
+   * @private
+   */
   private readonly logger: Logger;
-  private readonly routeHandlers: Controller[] = [];
+
+  /**
+   * Controllers.
+   * @private
+   */
+  private readonly controllers: Controller[] = [];
+
+  /**
+   * Web Sockets.
+   * @private
+   */
+  private readonly webSockets = new Map<
+    SocketId,
+    Socket<DefaultEventsMap, DefaultEventsMap>
+  >();
 
   /**
    * Creates a new controller manager implementation.
@@ -43,8 +64,8 @@ export class ControllerManagerImpl implements ControllerManager {
    * @param express the express app to add the routes to.
    */
   addRoutes = (express: Express): void => {
-    this.routeHandlers.forEach((routeHandler) => {
-      routeHandler.addRoutes(express);
+    this.controllers.forEach((controllers) => {
+      controllers.addRoutes(express);
     });
   };
 
@@ -53,7 +74,7 @@ export class ControllerManagerImpl implements ControllerManager {
    * @param controller the controller to handle.
    */
   registerController = (controller: Controller): void => {
-    this.routeHandlers.push(controller);
+    this.controllers.push(controller);
   };
 
   /**
@@ -62,5 +83,12 @@ export class ControllerManagerImpl implements ControllerManager {
    */
   registerControllers(controllers: Controller[]): void {
     controllers.forEach((r) => this.registerController(r));
+  }
+
+  webSocketConnected(
+    socketIoServer: Server,
+    socket: Socket<DefaultEventsMap, DefaultEventsMap>,
+  ): void {
+    this.webSockets.set(socket.id, socket);
   }
 }

@@ -15,6 +15,8 @@
 
 import { Controller } from './controller';
 import { Express } from 'express';
+import { Server, Socket } from 'socket.io';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 /**
  * Interface implemented by classes that manage controllers.
@@ -37,4 +39,14 @@ export interface ControllerManager {
    * @param controllers the controllers to register.
    */
   registerControllers(controllers: Controller[]): void;
+
+  /**
+   * Register a connected web socket.
+   * @param socketIoServer the web socket server connected to.
+   * @param socket the web socket.
+   */
+  webSocketConnected(
+    socketIoServer: Server,
+    socket: Socket<DefaultEventsMap, DefaultEventsMap>,
+  ): void;
 }
