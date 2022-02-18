@@ -14,35 +14,38 @@
  */
 
 import { Controller } from '../../server/controllers/controller';
-import { Express } from 'express';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
+import { SCENE_VIEW_DEPENDENCY_TYPES } from '../../scene';
 import { i18n } from 'i18next';
-import { SCENE_VIEW_DEPENDENCY_TYPES, SceneView } from '../view';
+import { PlayerView } from '../view';
+import { Express } from 'express';
+import exp from 'constants';
 
 /**
- * The route handler for Scene.
+ * The route handler for Player.
  */
 @injectable()
-export class SceneController implements Controller {
+export class PlayerController implements Controller {
   /** Object used to log messages. */
   private readonly logger: Logger;
 
   /** Object for translation. */
   private readonly i18n: i18n;
+
   /**
-   * Create a new SceneController.
+   * Create a new PlayerController.
    * @param loggerFactory the factory used to create logging objects.
    * @param i18nProvider provider for the translation object.
-   * @param sceneView the view for scenes
+   * @param playerView the view for players.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
     @inject(SCENE_VIEW_DEPENDENCY_TYPES.SceneView)
-    private readonly sceneView: SceneView,
+    private readonly playerView: PlayerView,
   ) {
     this.logger = loggerFactory(this.constructor.name);
     this.i18n = i18nProvider.i18n();
@@ -54,25 +57,23 @@ export class SceneController implements Controller {
    */
   addRoutes(expressApp: Express): void {
     this.logger.debug(
-      this.i18n.t('server.debug.route.add', { path: '/scene' }),
+      this.i18n.t('server.debug.route.add', { path: '/player' }),
     );
-    expressApp.get('/scene/:id', (req, res) => {
+
+    expressApp.get('/player/:id', (req, res) => {
       const id = req.params.id;
       try {
-        res.send(this.sceneView.getSceneData(id));
-      } catch (e) {
+        res.send(this.playerView.getPlayerData(id));
+      } catch (error) {
         this.logger.warn(
-          this.i18n.t('server.request.unknownId', {
-            what: 'Scene',
-            id,
-          }),
+          this.i18n.t('server.request.unknownId', { what: 'Player', id }),
         );
         res.sendStatus(404);
       }
     });
 
-    expressApp.get('/scene', (req, res) => {
-      res.send(this.sceneView.getSceneList());
+    expressApp.get('/player', (req, res) => {
+      res.send(this.playerView.getPlayerList());
     });
   }
 }

@@ -13,27 +13,5 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Player } from './player';
-
-/**
- * Interface for player manager.
- */
-export interface PlayerManager {
-  /**
-   * Adds a player to the player manager.
-   * @param player the player to add.
-   */
-  addPlayer(player: Player): void;
-
-  /**
-   * Removes a player from the player manager.
-   * @param player the player or player name to remove.
-   */
-  removePlayer(player: string | Player): void;
-
-  /**
-   * Returns if the player manager contains the player.
-   * @param player the player name to check.
-   */
-  hasPlayer(player: string): boolean;
-}
+export { PLAYER_CONTROLLER_DEPENDENCY_TYPES } from './dependecy-types';
+export { PlayerController } from './player-controller';

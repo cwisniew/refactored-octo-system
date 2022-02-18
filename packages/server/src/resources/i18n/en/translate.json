@@ -1,4 +1,9 @@
 {
+  "model": {
+    "debug": {
+      "created": "Created {{what}} with id {{id}}"
+    }
+  },
   "server": {
     "started": "Server started on port {{port}}",
     "wsStarted":  "Started Web Socket listener on port {{port}}",

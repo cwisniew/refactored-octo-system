@@ -13,11 +13,18 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export type { Player, Team, PlayerFactory, PlayerManager } from './model';
-export { PLAYER_DEPENDENCY_TYPES } from './model';
+import { dependencyContainer } from '../../utils/dependency-injection';
+import { PlayerViewImpl } from './player-view-impl';
+import { PlayerView } from './player-view';
+import { PLAYER_VIEW_DEPENDENCY_TYPES } from './dependency-types';
 
-export { PLAYER_VIEW_DEPENDENCY_TYPES } from './view';
-export type { PlayerView } from './view';
+/* Only bind if not already bound. */
+if (!dependencyContainer.isBound(PLAYER_VIEW_DEPENDENCY_TYPES.PlayerView)) {
+  dependencyContainer
+    .bind<PlayerView>(PLAYER_VIEW_DEPENDENCY_TYPES.PlayerView)
+    .to(PlayerViewImpl)
+    .inSingletonScope();
+}
 
-export { PLAYER_CONTROLLER_DEPENDENCY_TYPES } from './controller';
-export { PlayerController } from './controller';
+export { PLAYER_VIEW_DEPENDENCY_TYPES };
+export type { PlayerView } from './player-view';

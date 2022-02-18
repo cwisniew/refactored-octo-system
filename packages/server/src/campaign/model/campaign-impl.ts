@@ -77,7 +77,12 @@ export class CampaignImpl implements Campaign {
     this.i18n = i18nProvider.i18n();
     this.name = '';
     this.formatVersion = CURRENT_CAMPAIGN_FORMAT_VERSION;
-    this.logger.debug(this.i18n.t('model.debug.created', { id: this.id }));
+    this.logger.debug(
+      this.i18n.t('model.debug.created', {
+        what: this.constructor.name,
+        id: this.id,
+      }),
+    );
   }
 
   /**

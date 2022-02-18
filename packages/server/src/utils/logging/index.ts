@@ -61,3 +61,4 @@ if (!dependencyContainer.isBound(LOGGING_DEPENDENCY_TYPES.LoggerFactory)) {
 
 export { LOGGING_DEPENDENCY_TYPES };
 export type { Logger };
+export type { LoggerFactory } from './logger-factory';

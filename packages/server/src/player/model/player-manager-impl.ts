@@ -15,9 +15,11 @@
 
 import { Player } from './player';
 import { inject, injectable } from 'inversify';
-import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
-import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
+import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
+import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
 import { PlayerManager } from './player-manager';
+import { Team } from './team';
+import { TeamImpl } from './team-impl';
 
 /**
  * A PlayerManager implementation that manages players for the game.
@@ -35,6 +37,13 @@ export class PlayerManagerImpl implements PlayerManager {
    * @private
    */
   private readonly playerMap = new Map<string, Player>();
+
+  /**
+   * TODO: CDW this is not likely to be what wwe want long term.
+   * The default team for players.
+   * @private
+   */
+  private readonly defaultTeam: Team = new TeamImpl('gm', 'gm');
 
   /**
    * Creates a new PlayerManagerImpl.
@@ -74,5 +83,27 @@ export class PlayerManagerImpl implements PlayerManager {
    */
   hasPlayer(player: string): boolean {
     return this.playerMap.has(player);
+  }
+
+  /**
+   * Returns the player with the given name.
+   * @param player the player name to get.
+   */
+  getPlayer(player: string): Player | undefined {
+    return this.playerMap.get(player);
+  }
+
+  /**
+   * Returns all the players in the player manager.
+   */
+  getPlayers(): Player[] {
+    return Array.from(this.playerMap.values());
+  }
+
+  /**
+   * Returns the default team for unassigned players.
+   */
+  getDefaultTeam(): Team {
+    return this.defaultTeam;
   }
 }

@@ -22,6 +22,10 @@ import {
   SceneController,
   SCENE_CONTROLLER_DEPENDENCY_TYPES,
 } from '../../scene';
+import {
+  PLAYER_CONTROLLER_DEPENDENCY_TYPES,
+  PlayerController,
+} from '../../player';
 
 /**
  * Register the route for campaigns.
@@ -37,4 +41,12 @@ registerNewRoute(
 registerNewRoute(
   SCENE_CONTROLLER_DEPENDENCY_TYPES.SceneController,
   SceneController,
+);
+
+/**
+ * Register the route for the players.
+ */
+registerNewRoute(
+  PLAYER_CONTROLLER_DEPENDENCY_TYPES.PlayerController,
+  PlayerController,
 );

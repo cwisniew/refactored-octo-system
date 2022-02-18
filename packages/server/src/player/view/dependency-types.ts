@@ -13,26 +13,10 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Player } from './player';
-import { Team } from './team';
-
 /**
- * The PlayerImpl class is the implementation of the Player interface.
- *
- * It is used to represent a player in the game.
+ * Dependency types for scene views.
  */
-export class PlayerImpl implements Player {
-  /**
-   * Creates a new PlayerImpl instance.
-   * @param name The name of the player.
-   * @param team The team that the player belongs to.
-   */
-  constructor(readonly name: string, private team: Team) {}
-
-  /**
-   * Returns the team that the player belongs to.
-   */
-  getTeam(): Team {
-    return this.team;
-  }
-}
+export const PLAYER_VIEW_DEPENDENCY_TYPES = {
+  /** The player view. */
+  PlayerView: Symbol.for('PlayerView'),
+};

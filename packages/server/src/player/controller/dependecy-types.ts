@@ -13,11 +13,12 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export type { Player, Team, PlayerFactory, PlayerManager } from './model';
-export { PLAYER_DEPENDENCY_TYPES } from './model';
-
-export { PLAYER_VIEW_DEPENDENCY_TYPES } from './view';
-export type { PlayerView } from './view';
-
-export { PLAYER_CONTROLLER_DEPENDENCY_TYPES } from './controller';
-export { PlayerController } from './controller';
+/**
+ * Dependency types for the scene controller.
+ */
+export const PLAYER_CONTROLLER_DEPENDENCY_TYPES = {
+  /**
+   * Player Controller.
+   */
+  PlayerController: Symbol.for('PlayerController'),
+};

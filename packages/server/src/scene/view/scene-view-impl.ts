@@ -22,6 +22,10 @@ import { Scene, SCENE_DEPENDENCY_TYPES, SceneStore } from '../model';
  */
 @injectable()
 export class SceneViewImpl implements SceneView {
+  /**
+   * Create a new {@link SceneViewImpl} instance.
+   * @param sceneStore - The {@link SceneStore} to use to get the {@link Scene}
+   */
   constructor(
     @inject(SCENE_DEPENDENCY_TYPES.SceneStore)
     private readonly sceneStore: SceneStore,
@@ -62,12 +66,7 @@ export class SceneViewImpl implements SceneView {
    */
   getSceneList(): SceneListData {
     return {
-      scenes: this.sceneStore.getSceneList().map((s) => {
-        return {
-          id: s.id,
-          name: s.getName(),
-        };
-      }),
+      scenes: this.sceneStore.getSceneList().map(this.extractSceneData),
     };
   }
 }

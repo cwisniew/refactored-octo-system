@@ -13,11 +13,12 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export type { Player, Team, PlayerFactory, PlayerManager } from './model';
-export { PLAYER_DEPENDENCY_TYPES } from './model';
-
-export { PLAYER_VIEW_DEPENDENCY_TYPES } from './view';
-export type { PlayerView } from './view';
-
-export { PLAYER_CONTROLLER_DEPENDENCY_TYPES } from './controller';
-export { PlayerController } from './controller';
+/**
+ * The Dependency types for the players.
+ */
+export const PLAYER_DEPENDENCY_TYPES = {
+  /** Factory for creating player objects. */
+  PlayerFactory: Symbol.for('Factory<Player>'),
+  /** The player manager for the server. */
+  PlayerManager: Symbol.for('PlayerManager'),
+};
