@@ -13,27 +13,20 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Player } from './player';
+import { Connection } from './connection';
 
 /**
- * Interface for player manager.
+ * A ConnectionManager is responsible for managing the connections to the server.
  */
-export interface PlayerManager {
+export interface ConnectionManager {
   /**
-   * Adds a player to the player manager.
-   * @param player the player to add.
+   * Returns the connections to the server.
    */
-  addPlayer(player: Player): void;
+  getConnections(): Connection[];
 
   /**
-   * Removes a player from the player manager.
-   * @param player the player or player name to remove.
+   * Returns the connection to the server for a specific player.
+   * @param name the name of the player.
    */
-  removePlayer(player: string | Player): void;
-
-  /**
-   * Returns if the player manager contains the player.
-   * @param player the player name to check.
-   */
-  hasPlayer(player: string): boolean;
+  getConnection(name: string): Connection | undefined;
 }

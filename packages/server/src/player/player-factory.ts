@@ -13,15 +13,14 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { Player } from './player';
 import { PlayerImpl } from './player-impl';
 import { TeamImpl } from './team-impl';
 
-export const playerFactory = (
-  name: string,
-  socket: Socket<DefaultEventsMap, DefaultEventsMap>,
-): Player => {
-  return new PlayerImpl(name, socket, new TeamImpl('gm', 'gm'));
+/**
+ * A factory for creating Player objects.
+ * @param name The name of the player
+ */
+export const playerFactory = (name: string): Player => {
+  return new PlayerImpl(name, new TeamImpl('gm', 'gm'));
 };

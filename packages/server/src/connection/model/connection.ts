@@ -13,27 +13,17 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Player } from './player';
+import { Socket } from 'socket.io';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
 /**
- * Interface for player manager.
+ * Interface for the Connection objects.
  */
-export interface PlayerManager {
-  /**
-   * Adds a player to the player manager.
-   * @param player the player to add.
-   */
-  addPlayer(player: Player): void;
-
-  /**
-   * Removes a player from the player manager.
-   * @param player the player or player name to remove.
-   */
-  removePlayer(player: string | Player): void;
-
-  /**
-   * Returns if the player manager contains the player.
-   * @param player the player name to check.
-   */
-  hasPlayer(player: string): boolean;
+export interface Connection {
+  /** The name of the player that this connection belongs to. */
+  playerName: string;
+  /** Returns the WebSocket for this connection. */
+  getSocket(): Socket<DefaultEventsMap, DefaultEventsMap> | undefined;
+  /** Returns if the connection is still connected. */
+  isConnected(): boolean;
 }

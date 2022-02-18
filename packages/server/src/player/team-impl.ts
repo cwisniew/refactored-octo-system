@@ -15,12 +15,28 @@
 
 import { Team, TeamPermissions } from './team';
 
+/**
+ * An implementation of the Team interface to track teams.
+ */
 export class TeamImpl implements Team {
+  /**
+   * Create a new team.
+   * @param name the name of the team.
+   * @param permissions the permissions of the team.
+   */
   constructor(readonly name: string, private permissions: TeamPermissions) {}
 
+  /**
+   * Returns the permissions of the team.
+   */
   getPermissions(): TeamPermissions {
     return this.permissions;
   }
+
+  /**
+   * Sets the permissions of the team.
+   * @param permissions
+   */
   setPermissions(permissions: TeamPermissions): void {
     this.permissions = permissions;
   }

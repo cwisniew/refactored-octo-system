@@ -19,11 +19,28 @@ import { Logger, LOGGING_DEPENDENCY_TYPES } from '../utils/logging';
 import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../utils/i18n';
 import { PlayerManager } from './player-manager';
 
+/**
+ * A PlayerManager implementation that manages players for the game.
+ */
 @injectable()
 export class PlayerManagerImpl implements PlayerManager {
+  /**
+   * The logger for log messages.
+   * @private
+   */
   private readonly logger: Logger;
+
+  /**
+   * The I18NProvider for translating messages.
+   * @private
+   */
   private readonly playerMap = new Map<string, Player>();
 
+  /**
+   * Creates a new PlayerManagerImpl.
+   * @param loggerFactory the factory for retrieving the logging object.
+   * @param i18nProvider the I18NProvider for translating messages.
+   */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
@@ -32,10 +49,17 @@ export class PlayerManagerImpl implements PlayerManager {
     this.logger = loggerFactory(this.constructor.name);
   }
 
+  /**
+   * Adds a player to the player manager.
+   * @param player the player to add.
+   */
   addPlayer(player: Player): void {
     this.playerMap.set(player.name, player);
   }
-
+  /**
+   * Removes a player from the player manager.
+   * @param player the player or player name to remove.
+   */
   removePlayer(player: string | Player): void {
     if (typeof player === 'string') {
       this.playerMap.delete(player);
@@ -44,6 +68,10 @@ export class PlayerManagerImpl implements PlayerManager {
     }
   }
 
+  /**
+   * Returns if the player manager contains the player.
+   * @param player the player name to check.
+   */
   hasPlayer(player: string): boolean {
     return this.playerMap.has(player);
   }

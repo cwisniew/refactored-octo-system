@@ -13,12 +13,14 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { Team } from './team';
 
+/**
+ * A player in the game.
+ */
 export interface Player {
+  /** The name of the player. */
   name: string;
+  /** Returns the team that the player belongs to. */
   getTeam(): Team;
-  getSocket(): Socket<DefaultEventsMap, DefaultEventsMap>;
 }

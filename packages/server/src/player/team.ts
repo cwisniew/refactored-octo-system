@@ -14,8 +14,22 @@
  */
 
 export type TeamPermissions = 'gm' | 'player' | 'observer';
+
+/**
+ * Interface that represents a team in the game.
+ */
 export interface Team {
+  /** The name of the team. */
   name: string;
+
+  /**
+   * Returns the permissions of the team.
+   */
   getPermissions(): TeamPermissions;
+
+  /**
+   * Sets the permissions of the team.
+   * @param permissions
+   */
   setPermissions(permissions: TeamPermissions): void;
 }

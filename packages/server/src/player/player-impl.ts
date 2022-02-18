@@ -13,22 +13,26 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { Player } from './player';
 import { Team } from './team';
 
+/**
+ * The PlayerImpl class is the implementation of the Player interface.
+ *
+ * It is used to represent a player in the game.
+ */
 export class PlayerImpl implements Player {
-  constructor(
-    readonly name: string,
-    private socket: Socket<DefaultEventsMap, DefaultEventsMap>,
-    private team: Team,
-  ) {}
+  /**
+   * Creates a new PlayerImpl instance.
+   * @param name The name of the player.
+   * @param team The team that the player belongs to.
+   */
+  constructor(readonly name: string, private team: Team) {}
 
+  /**
+   * Returns the team that the player belongs to.
+   */
   getTeam(): Team {
     return this.team;
-  }
-  getSocket(): Socket<DefaultEventsMap, DefaultEventsMap> {
-    return this.socket;
   }
 }

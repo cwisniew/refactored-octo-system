@@ -13,27 +13,12 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { Player } from './player';
-
 /**
- * Interface for player manager.
+ * The Dependency types for the connections.
  */
-export interface PlayerManager {
-  /**
-   * Adds a player to the player manager.
-   * @param player the player to add.
-   */
-  addPlayer(player: Player): void;
-
-  /**
-   * Removes a player from the player manager.
-   * @param player the player or player name to remove.
-   */
-  removePlayer(player: string | Player): void;
-
-  /**
-   * Returns if the player manager contains the player.
-   * @param player the player name to check.
-   */
-  hasPlayer(player: string): boolean;
-}
+export const CONNECTIONS_DEPENDENCY_TYPES = {
+  /** The Connections Object. */
+  Connection: Symbol.for('Connection'),
+  /** The Connection Manager Object. */
+  ConnectionManager: Symbol.for('ConnectionManager'),
+};
