@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -14,7 +14,7 @@
  */
 
 import { interfaces } from 'inversify';
-import { GameMap, SCENE_DEPENDENCY_TYPES } from './index';
+import { Scene, SCENE_DEPENDENCY_TYPES } from './index';
 import { dependencyContainer } from '../../utils/dependency-injection';
 
 /**
@@ -22,16 +22,14 @@ import { dependencyContainer } from '../../utils/dependency-injection';
  */
 export const registerStarterSceneFactory = (): void => {
   dependencyContainer
-    .bind<interfaces.Factory<GameMap>>(
-      SCENE_DEPENDENCY_TYPES.StarterSceneFactory,
-    )
-    .toFactory<GameMap, [name: string]>((context: interfaces.Context) => {
+    .bind<interfaces.Factory<Scene>>(SCENE_DEPENDENCY_TYPES.StarterSceneFactory)
+    .toFactory<Scene, [name: string]>((context: interfaces.Context) => {
       return (mapName: string) => {
-        const gamemap = context.container.get<GameMap>(
+        const scene = context.container.get<Scene>(
           SCENE_DEPENDENCY_TYPES.Scene,
         );
-        gamemap.setName(mapName);
-        return gamemap;
+        scene.setName(mapName);
+        return scene;
       };
     });
 };

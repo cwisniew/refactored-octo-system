@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -13,7 +13,7 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import { GameMap } from '../../scene';
+import { Scene } from '../../scene';
 
 /**
  * Interface used for Campaign objects.
@@ -45,20 +45,20 @@ export interface Campaign {
   getFormatVersion(): string;
 
   /**
-   * Returns ids of the game maps for this model.
+   * Returns ids of the game scenes this model.
    */
-  getMapIds(): string[];
+  getSceneIds(): string[];
 
   /**
-   * Adds a game map to the model
-   * @param gameMap the {@link GameMap} to add to the model.
+   * Adds a scene to the model
+   * @param scene the {@link Scene} to add to the model.
    */
-  addGameMap(gameMap: GameMap): void;
+  addScene(scene: Scene): void;
 
   /**
-   * Removes a game map from the model.
-   * @param gameMap either a string which is treated as the id of the {@link GameMap}
-   * or the actual {@link GameMap} to remove.
+   * Removes a scene from the model.
+   * @param scene a string which is treated as the id of the {@link Scene}
+   * or the actual {@link Scene} to remove.
    */
-  removeGameMap(gameMap: string | GameMap): void;
+  removeScene(scene: string | Scene): void;
 }

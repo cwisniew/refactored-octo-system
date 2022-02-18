@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -19,7 +19,7 @@ import { Scene } from './scene';
 import { SceneImpl } from './scene-impl';
 import { SceneStore } from './scene-store';
 import { SceneStoreImpl } from './scene-store-impl';
-import { registerStarterSceneFactory } from './starter-game-map-factory';
+import { registerStarterSceneFactory } from './starter-scene-factory';
 
 /* Only bind model if it is not already bound. */
 if (!dependencyContainer.isBound(SCENE_DEPENDENCY_TYPES.Scene)) {

@@ -20,12 +20,12 @@
       "created": "New Campaign object created with id = {{id}}"
     }
   },
-  "gamemap": {
+  "scene": {
     "starter": {
-      "name": "New Map"
+      "name": "New Scene"
     },
     "debug": {
-      "created": "game map created with id = {{id}}"
+      "created": "Scene created with id = {{id}}"
     }
   }
 }

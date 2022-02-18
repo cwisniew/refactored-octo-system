@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -17,9 +17,9 @@ import { Campaign } from './campaign';
 import { inject, injectable } from 'inversify';
 import { Logger, LOGGING_DEPENDENCY_TYPES } from '../../utils/logging';
 import { IdGen, ID_GEN_DEPENDENCY_TYPES } from '../../utils/id';
-import { GameMap, GameMapStore, GAME_MAP_DEPENDENCY_TYPES } from '../../scene';
 import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
 import { i18n } from 'i18next';
+import { Scene, SCENE_DEPENDENCY_TYPES, SceneStore } from '../../scene';
 
 export const CURRENT_CAMPAIGN_FORMAT_VERSION = '0.0.1';
 
@@ -62,15 +62,15 @@ export class CampaignImpl implements Campaign {
    * @param loggerFactory the factory for creating logging objects.
    * @param idGen class used to generate ids.
    * @param i18nProvider the provider to get translation objects.
-   * @param gameMapStore the storage for the game maps.
+   * @param sceneStore the storage for the scenes.
    */
   constructor(
     @inject(LOGGING_DEPENDENCY_TYPES.LoggerFactory)
     loggerFactory: (name: string) => Logger,
     @inject(ID_GEN_DEPENDENCY_TYPES.IdGen) idGen: IdGen,
     @inject(I18N_DEPENDENCY_TYPES.I18N) i18nProvider: I18NProvider,
-    @inject(GAME_MAP_DEPENDENCY_TYPES.GameMapStore)
-    private readonly gameMapStore: GameMapStore,
+    @inject(SCENE_DEPENDENCY_TYPES.SceneStore)
+    private readonly sceneStore: SceneStore,
   ) {
     this.id = idGen.id();
     this.logger = loggerFactory(this.constructor.name);
@@ -111,26 +111,26 @@ export class CampaignImpl implements Campaign {
   }
 
   /**
-   * Returns ids of the game maps for this model.
+   * Returns ids of the scenes for this model.
    */
-  getMapIds(): string[] {
-    return this.gameMapStore.getMapIds();
+  getSceneIds(): string[] {
+    return this.sceneStore.getSceneIds();
   }
 
   /**
-   * Adds a game map to the model
-   * @param gameMap the {@link GameMap} to add to the model.
+   * Adds a scene to the model
+   * @param scene the {@link SCene} to add to the model.
    */
-  addGameMap(gameMap: GameMap): void {
-    this.gameMapStore.addGameMap(gameMap);
+  addScene(scene: Scene): void {
+    this.sceneStore.addScene(scene);
   }
 
   /**
-   * Removes a game map from the model.
-   * @param gameMap either a string which is treated as the id of the
-   * {@link GameMap} or the actual {@link GameMap} to remove.
+   * Removes a scene from the model.
+   * @param scene either a string which is treated as the id of the
+   * {@link scene} or the actual {@link scene} to remove.
    */
-  removeGameMap(gameMap: string | GameMap): void {
-    this.gameMapStore.removeGameMap(gameMap);
+  removeScene(scene: string | Scene): void {
+    this.sceneStore.removeScene(scene);
   }
 }

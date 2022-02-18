@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -25,8 +25,8 @@ export interface CampaignData {
   name: string;
   /** The version format of the model. */
   formatVersion: string;
-  /** The ids of the game maps for the model. */
-  gameMaps: string[];
+  /** The ids of the scenes for the model. */
+  scenes: string[];
 }
 
 /**

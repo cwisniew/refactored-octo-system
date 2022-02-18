@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -14,17 +14,17 @@
  */
 
 import { dependencyContainer } from '../../utils/dependency-injection';
-import { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './dependency-types';
 import { SceneView } from './scene-view';
-import { GameMapViewImpl } from './game-map-view-impl';
+import { SCENE_VIEW_DEPENDENCY_TYPES } from './dependency-types';
+import { SceneViewImpl } from './scene-view-impl';
 
 /* Only bind if not already bound. */
-if (!dependencyContainer.isBound(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)) {
+if (!dependencyContainer.isBound(SCENE_VIEW_DEPENDENCY_TYPES.SceneView)) {
   dependencyContainer
-    .bind<SceneView>(GAME_MAP_VIEW_DEPENDENCY_TYPES.GameMapView)
-    .to(GameMapViewImpl)
+    .bind<SceneView>(SCENE_VIEW_DEPENDENCY_TYPES.SceneView)
+    .to(SceneViewImpl)
     .inSingletonScope();
 }
 
-export { GAME_MAP_VIEW_DEPENDENCY_TYPES };
+export { SCENE_VIEW_DEPENDENCY_TYPES };
 export type { SceneView };

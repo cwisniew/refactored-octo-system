@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -14,9 +14,9 @@
  */
 
 /**
- * Dependency types for game map views.
+ * Dependency types for scene views.
  */
-export const GAME_MAP_VIEW_DEPENDENCY_TYPES = {
-  /** The game map view. */
-  GameMapView: Symbol.for('GameMapView'),
+export const SCENE_VIEW_DEPENDENCY_TYPES = {
+  /** The scene view. */
+  SceneView: Symbol.for('SceneView'),
 };

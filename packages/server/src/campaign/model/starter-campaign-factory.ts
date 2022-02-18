@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -18,7 +18,7 @@ import { dependencyContainer } from '../../utils/dependency-injection';
 import { interfaces } from 'inversify';
 import { CAMPAIGN_DEPENDENCY_TYPES } from './dependency-types';
 import { I18NProvider, I18N_DEPENDENCY_TYPES } from '../../utils/i18n';
-import { GAME_MAP_DEPENDENCY_TYPES, GameMap } from '../../scene';
+import { Scene, SCENE_DEPENDENCY_TYPES } from '../../scene';
 
 /**
  * Factory for creating a "starter" model.
@@ -41,11 +41,11 @@ export const registerStarterCampaignFactory = (): void => {
         );
         campaign.setName(campaignName);
 
-        const gameMapFactory: (name: string) => GameMap = context.container.get(
-          GAME_MAP_DEPENDENCY_TYPES.StarterGameMapFactory,
+        const sceneFactory: (name: string) => Scene = context.container.get(
+          SCENE_DEPENDENCY_TYPES.StarterSceneFactory,
         );
-        const gameMap = gameMapFactory(i18n.t('gamemap.starter.name'));
-        campaign.addGameMap(gameMap);
+        const scene = sceneFactory(i18n.t('scene.starter.name'));
+        campaign.addScene(scene);
         return campaign;
       };
     });

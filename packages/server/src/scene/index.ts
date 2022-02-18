@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -13,12 +13,12 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-export type { GameMap } from './model';
-export type { GameMapStore } from './model';
-export { GAME_MAP_DEPENDENCY_TYPES } from './model';
+export type { Scene } from './model';
+export type { SceneStore } from './model';
+export { SCENE_DEPENDENCY_TYPES } from './model';
 
-export { GAME_MAP_VIEW_DEPENDENCY_TYPES } from './view';
-export type { GameMapView } from './view';
+export { SCENE_VIEW_DEPENDENCY_TYPES } from './view';
+export type { SceneView } from './view';
 
-export { GAME_MAP_CONTROLLER_DEPENDENCY_TYPES } from './controller';
-export { GameMapController } from './controller';
+export { SCENE_CONTROLLER_DEPENDENCY_TYPES } from './controller';
+export { SceneController } from './controller';

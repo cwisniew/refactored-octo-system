@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -31,7 +31,7 @@ export class CampaignViewImpl implements CampaignView {
       id: campaign.id,
       name: campaign.getName(),
       formatVersion: campaign.getFormatVersion(),
-      gameMaps: campaign.getMapIds(),
+      scenes: campaign.getSceneIds(),
     };
   }
 }

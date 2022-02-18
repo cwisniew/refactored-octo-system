@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -21,7 +21,7 @@ import { I18N_DEPENDENCY_TYPES, I18NProvider } from '../../utils/i18n';
 import { i18n } from 'i18next';
 
 /**
- * Class that represents a game map.
+ * Class that represents a scene.
  */
 @injectable()
 export class SceneImpl implements Scene {

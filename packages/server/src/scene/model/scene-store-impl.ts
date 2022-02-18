@@ -3,7 +3,7 @@
  * licensed under the Affero GPL Version 3 or, at your option, any later
  * version.
  *
- * MapTool Source Code is distributed in the hope that it will be
+ * This Source Code is distributed in the hope that it will be
  * useful, but WITHOUT ANY WARRANTY; without even the implied warranty
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
@@ -38,7 +38,7 @@ export class SceneStoreImpl implements SceneStore {
    */
   private readonly i18n: i18n;
 
-  /** The storage for game maps. */
+  /** The storage for scenes. */
   private readonly store = new Map<string, Scene>();
 
   /**
@@ -56,7 +56,7 @@ export class SceneStoreImpl implements SceneStore {
   }
 
   /**
-   * Returns ids of the game maps.
+   * Returns ids of the scenes.
    */
   getSceneIds(): string[] {
     return Array.from(this.store.keys());
@@ -103,14 +103,14 @@ export class SceneStoreImpl implements SceneStore {
   }
 
   /**
-   * Clears all the game maps from the store.
+   * Clears all the scenes from the store.
    */
   clear(): void {
     this.store.clear();
   }
 
   /**
-   * Returns the game maps in the game store.
+   * Returns the scenes in the game store.
    */
   getSceneList(): Scene[] {
     return Array.from(this.store.values());
