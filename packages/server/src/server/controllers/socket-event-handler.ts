@@ -13,18 +13,20 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import React, { ReactElement } from 'react';
-import './App.css';
-import { DIProvider } from './components/dependency-injection/di-provider';
+import { Server, Socket } from 'socket.io';
+import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 
-const App = (): ReactElement => {
-  return (
-    <DIProvider>
-      <div className="App">
-        <header className="App-header">VTT2</header>
-      </div>
-    </DIProvider>
-  );
-};
-
-export default App;
+/**
+ * Interface for classes that handle socket events.
+ */
+export interface SocketEventHandler {
+  /**
+   * Handles the connection event and registers other event handlers.
+   * @param socketIOServer the socket.io server.
+   * @param socket the socket the event was emitted from.
+   */
+  connected(
+    socketIOServer: Server,
+    socket: Socket<DefaultEventsMap, DefaultEventsMap>,
+  ): void;
+}

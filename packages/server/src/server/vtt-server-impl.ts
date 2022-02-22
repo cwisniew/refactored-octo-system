@@ -98,19 +98,22 @@ export class VttServerImpl implements VTTServer {
 
     this.server = http.createServer(this.expressApp);
 
+    this.addMiddleware();
+    this.addRoutes();
+
     this.logger.info(this.i18n.t('server.wsStarted', { port: this.port }));
     this.socketIoServer = new Server(this.server, {
       cors: { origin: 'http://localhost:3001' },
     });
 
-    this.addMiddleware();
-    this.addRoutes();
-
     // TODO: CDW add on connection callback for socket io here
+    this.socketIoServer.on('connection', (socket) => {
+      // this.messageHandler.handleMessage(this.socketIoServer, socket);
+      this.logger.info(this.i18n.t('server.wsConnected', { id: socket.id }));
+    });
 
     this.server.listen(this.port, () => {
       this.logger.info(this.i18n.t('server.started', { port: this.port }));
-      //`Server is running on port ${this.port}`);
     });
   };
 

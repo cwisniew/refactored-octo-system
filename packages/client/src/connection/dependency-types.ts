@@ -13,18 +13,6 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import React, { ReactElement } from 'react';
-import './App.css';
-import { DIProvider } from './components/dependency-injection/di-provider';
-
-const App = (): ReactElement => {
-  return (
-    <DIProvider>
-      <div className="App">
-        <header className="App-header">VTT2</header>
-      </div>
-    </DIProvider>
-  );
+export const SOCKET_DEPENDENCY_TYPES = {
+  SocketConnection: Symbol.for('SocketConnection'),
 };
-
-export default App;
