@@ -14,26 +14,14 @@
  */
 
 import React, { ReactElement } from 'react';
-import './App.css';
-import { DIProvider } from './components/dependency-injection/di-provider';
-import { LoginDialog } from './components/login/login-dialog';
-import { Provider } from 'react-redux';
-import { store } from './state';
 
-const App = (): ReactElement => {
+export const LoginDialog = (): ReactElement => {
   return (
-    <DIProvider>
-      <Provider store={store}>
-        <LoginDialog />
-        <div className="App">
-          <header className="App-header">
-            VTT2
-            <LoginDialog />
-          </header>
-        </div>
-      </Provider>
-    </DIProvider>
+    <div className="login-dialog">
+      Name:
+      <br />
+      Password:
+      <br />
+    </div>
   );
 };
-
-export default App;

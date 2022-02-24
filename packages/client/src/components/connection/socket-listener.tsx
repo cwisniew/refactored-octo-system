@@ -13,28 +13,21 @@
  * text at <http://www.gnu.org/licenses/agpl.html>.
  */
 
-import 'reflect-metadata';
-
-import { Container } from 'inversify';
-import { Provider } from 'inversify-react';
-import React, { ReactNode } from 'react';
-
-import { SocketConnectionImpl } from '../../connection/socket-connection-impl';
+import React, { ReactElement, useEffect } from 'react';
 import { SOCKET_DEPENDENCY_TYPES, SocketConnection } from '../../connection';
+import { useInjection } from 'inversify-react';
 
-interface Props {
-  children: ReactNode;
-}
+const socket = useInjection<SocketConnection>(
+  SOCKET_DEPENDENCY_TYPES.SocketConnection,
+);
+const ws = socket.getSocket();
 
-const createContainer = () => {
-  const container: Container = new Container({ defaultScope: 'Singleton' });
-  container
-    .bind<SocketConnection>(SOCKET_DEPENDENCY_TYPES.SocketConnection)
-    .to(SocketConnectionImpl)
-    .inSingletonScope();
-  return container;
-};
+export const SocketListener = (): ReactElement => {
+  useEffect(() => {
+    ws.on('connect', () => {
+      console.log('connected');
+    });
+  });
 
-export const DIProvider = ({ children }: Props) => {
-  return <Provider container={createContainer}>{children}</Provider>;
+  return <div />;
 };
