@@ -42,7 +42,7 @@
     "i18next-fs-backend": "^1.1.4",
     "inversify": "^6.0.1",
     "reflect-metadata": "^0.1.13",
-    "socket.io": "^4.4.1",
+    "socket.io": "^4.5.3",
     "typesocket": "^1.0.1",
     "uuid": "^8.3.2",
     "winston": "^3.5.1",
